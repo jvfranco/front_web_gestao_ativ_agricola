@@ -1,1 +1,12 @@
-<p>listagem works!</p>
+<table mat-table [dataSource]="unidades">
+    <ng-container matColumnDef="abreviacao">
+        <th mat-header-cell *matHeaderCellDef>Abreviação</th>
+        <td mat-cell *matCellDef="let unid"> {{unid.abreviacao}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="descricao">
+        <th mat-header-cell *matHeaderCellDef>Descrição</th>
+        <td mat-cell *matCellDef="let unid"> {{unid.descricao}} </td>
+    </ng-container>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
