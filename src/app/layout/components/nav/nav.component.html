@@ -1,0 +1,19 @@
+<mat-sidenav-container>
+
+    <mat-sidenav class="sidenav mat-elevation-z8" opened mode="side">
+        <mat-nav-list class="nav-list">
+            <a mat-list-item class="link" routerLink="/unidade-de-medida/cadastro">
+                <i class="material-icons">home</i>Início
+            </a>
+            <a mat-list-item class="link" routerLink="/unidade-de-medida">
+                <i class="material-icons">article</i>Unidade de Medida
+            </a>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <div class="content mat-elevation-z8">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,33 +1,37 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { UnidadeDeMedida } from '../../models';
 import { UnidadeDeMedidaService } from '../../services';
+import { Paginacao } from '../../../core';
 
 @Component({
   selector: 'app-listagem',
   templateUrl: './listagem.component.html',
   styleUrls: ['./listagem.component.css']
 })
-export class ListagemComponent implements AfterViewInit {
-  unidades: UnidadeDeMedida[] = [];
+export class ListagemComponent implements OnInit {
 
-  displayedColumns: string[] = ['abreviacao', 'descricao'];
-  dataSource = new MatTableDataSource<UnidadeDeMedida>(this.unidades);
+  paginacao: Paginacao = {};
+  unidadesList: UnidadeDeMedida[] = [];
 
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
+  displayedColumns: string[] = ['abreviacao', 'descricao', 'acoes'];
 
   constructor(private service: UnidadeDeMedidaService) { }
 
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
+  ngOnInit(): void {
+    this.retornarTodasUnidades();
   }
+
 
   retornarTodasUnidades() {
     this.service.retornarTodasUnidades().subscribe(
       data => {
-        this.unidades = data
+        this.unidadesList = data['content'];
+        console.log(this.unidadesList);
+      },
+      err => {
+        console.log(JSON.stringify(err));
       }
     )
   }

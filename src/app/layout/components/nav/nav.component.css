@@ -1,0 +1,30 @@
+/* .sidenav {
+    background-color: rgb(11, 60, 196);
+    width: 200px;
+} */
+
+
+
+.content {
+    height: calc(100vh - 98px);
+    border-radius: 10px;
+    margin: 16px;
+    margin-left: 32px;
+
+    font-size: 2rem;
+    color: lightgray;
+}
+
+mat-sidenav {
+    margin: 16px;
+    width: 200px;
+    border-right: none;
+    background: #002b5c;
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.link {
+    color: white;
+}

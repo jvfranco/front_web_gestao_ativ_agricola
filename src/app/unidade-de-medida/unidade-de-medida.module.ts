@@ -13,9 +13,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatCardModule } from '@angular/material/card';
 
 import { ListagemComponent, CadastroComponent, UnidadeDeMedidaComponent } from './components';
-
+import { LayoutModule } from '../layout';
 import { UnidadeDeMedidaService } from './services';
 
 @NgModule({
@@ -37,6 +38,8 @@ import { UnidadeDeMedidaService } from './services';
     FlexLayoutModule,
     MatTableModule,
     MatPaginatorModule,
+    LayoutModule,
+    MatCardModule,
     HttpClientModule
   ],
   providers: [

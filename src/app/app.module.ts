@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { UnidadeDeMedidaModule, UnidadeDeMedidaRoutingModule } from './unidade-de-medida';
 import { LoginModule, LoginRoutingModule } from './autenticacao';
 
+import { LayoutModule } from './layout';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -19,6 +21,7 @@ import { LoginModule, LoginRoutingModule } from './autenticacao';
     LoginRoutingModule,
     UnidadeDeMedidaModule,
     UnidadeDeMedidaRoutingModule,
+    LayoutModule,
     
     AppRoutingModule
   ],
