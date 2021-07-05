@@ -1,7 +1,7 @@
 <mat-card class="card-home mat-elevation-z3">
     <div>
         <mat-card-title>Unidade de Medida</mat-card-title>
-        <mat-card-subtitle>Cadastro de Unidades de Medida</mat-card-subtitle>
+        <mat-card-subtitle>Atualização de Unidade de Medida</mat-card-subtitle>
     </div>
     <div>
         <button mat-mini-fab routerLink="/unidade-de-medida/" style="background-color: brown;">
@@ -31,9 +31,9 @@
 
         <mat-list-item fxLayoutAlign="center">
             <button mat-raised-button color="primary" [disabled]="form.invalid"
-                (click)="salvarNovaUnidade()" style="margin-right: 25px;">Salvar</button>
+                 style="margin-right: 25px;" (click)="atualizarUnidade()">Salvar</button>
 
-            <button mat-raised-button color="warn" (click)="resetarForm()">Cancelar</button>
+            <button mat-raised-button color="warn" routerLink="/unidade-de-medida/">Cancelar</button>
         </mat-list-item>
     </mat-list>
 </form>

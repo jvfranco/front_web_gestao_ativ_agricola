@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { environment as env } from '../../../environments/environment';
 
 import { UnidadeDeMedida } from '../models';
+import { Paginacao } from 'src/app/core';
 
 @Injectable()
 export class UnidadeDeMedidaService {
@@ -16,8 +17,16 @@ export class UnidadeDeMedidaService {
 
   constructor(private http: HttpClient) { } 
 
-  retornarTodasUnidades(): Observable<any> {
-    return this.http.get(env.baseUrl + this.PATH + this.GET_ALL_PATH);
+  retornarTodasUnidades(paginacao: Paginacao): Observable<any> {
+    let url = env.baseUrl + this.PATH + this.GET_ALL_PATH;
+
+    if (paginacao != null) {
+      url = url + '?page=' + paginacao.page + '&size=' + paginacao.size + '&sort=' + paginacao.sort + '&direction=' + paginacao.direction;
+    } 
+
+    console.log('Serviço'+JSON.stringify(url));
+
+    return this.http.get(url);
   }
   
   retornarUnidadeDetalhada(id: string): Observable<any> {

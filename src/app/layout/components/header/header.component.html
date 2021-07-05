@@ -1,7 +1,8 @@
 <mat-toolbar class="header mat-elevation-z4">
+
     <span>
         <a routerLink="/unidade-de-medida/">
-          <img class="logo" src="../../../../assets/Icons/campo.png" alt="logo">  
+            <img class="logo" src="../../../../assets/Icons/campo.png" alt="logo">
         </a>
     </span>
     <span class="title-group">
@@ -12,4 +13,20 @@
             Gestão Agrícola
         </a>
     </span>
+
+    <span matTooltip="Informações sobre o usuário logado" style="margin-left: auto;">
+        <a>
+            <i class="material-icons">
+                info
+            </i>
+        </a>
+    </span>
+    <span matTooltip="Sair" style="margin-left: 5px;">
+        <a>
+            <i class="material-icons">
+                logout
+            </i>
+        </a>
+    </span>
+
 </mat-toolbar>

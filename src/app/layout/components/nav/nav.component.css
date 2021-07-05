@@ -6,13 +6,13 @@
 
 
 .content {
-    height: calc(100vh - 98px);
     border-radius: 10px;
     margin: 16px;
     margin-left: 32px;
-
+    padding: 1%;
     font-size: 2rem;
     color: lightgray;
+    height: 778px;
 }
 
 mat-sidenav {
@@ -27,4 +27,13 @@ mat-sidenav {
 
 .link {
     color: white;
+}
+
+i {
+    margin-right: 5px;
+}
+
+.link:hover {
+    background-color: rgb(17, 131, 197);
+    border-radius: 10px;
 }

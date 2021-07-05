@@ -4,7 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import {
     UnidadeDeMedidaComponent,
     CadastroComponent,
-    ListagemComponent
+    ListagemComponent,
+    AtualizacaoComponent
 } from './components';
 
 export const UnidadeDeMedidaRoutes: Routes = [
@@ -19,6 +20,10 @@ export const UnidadeDeMedidaRoutes: Routes = [
             {
                 path: 'cadastro',
                 component: CadastroComponent
+            },
+            {
+                path: 'atualizacao/:unidMedidaID',
+                component: AtualizacaoComponent
             }
         ]
     }

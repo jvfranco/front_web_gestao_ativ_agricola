@@ -13,9 +13,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 import { MatCardModule } from '@angular/material/card';
 
-import { ListagemComponent, CadastroComponent, UnidadeDeMedidaComponent } from './components';
+import { 
+  ListagemComponent, 
+  CadastroComponent, 
+  UnidadeDeMedidaComponent, 
+  AtualizacaoComponent } from './components';
 import { LayoutModule } from '../layout';
 import { UnidadeDeMedidaService } from './services';
 
@@ -23,7 +28,8 @@ import { UnidadeDeMedidaService } from './services';
   declarations: [
     ListagemComponent,
     CadastroComponent,
-    UnidadeDeMedidaComponent
+    UnidadeDeMedidaComponent,
+    AtualizacaoComponent
   ],
   imports: [
     CommonModule,
@@ -40,6 +46,8 @@ import { UnidadeDeMedidaService } from './services';
     MatPaginatorModule,
     LayoutModule,
     MatCardModule,
+    MatSortModule,
+
     HttpClientModule
   ],
   providers: [

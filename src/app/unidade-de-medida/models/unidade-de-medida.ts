@@ -1,7 +1,7 @@
 export class UnidadeDeMedida {
     constructor(
-        id: string,
-        abreviacao: string,
-        descricao: string
+        public id: string,
+        public abreviacao: string,
+        public descricao: string
     ) {}
 }
