@@ -12,7 +12,7 @@
     padding: 1%;
     font-size: 2rem;
     color: lightgray;
-    height: 778px;
+    height: 775px;
 }
 
 mat-sidenav {
@@ -34,6 +34,17 @@ i {
 }
 
 .link:hover {
+    background-color: rgb(17, 131, 197);
+    border-radius: 10px;
+}
+
+.link-ativo {
+    color: white;
+    background-color: rgb(17, 131, 197);
+    border-radius: 10px;
+}
+
+.link-ativo:hover {
     background-color: rgb(17, 131, 197);
     border-radius: 10px;
 }

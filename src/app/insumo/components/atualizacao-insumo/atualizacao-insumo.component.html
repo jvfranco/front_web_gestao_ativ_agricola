@@ -1,0 +1,70 @@
+<mat-card class="card-home mat-elevation-z3">
+    <div>
+        <mat-card-title>Insumo</mat-card-title>
+        <mat-card-subtitle>Atualização de Insumo</mat-card-subtitle>
+    </div>
+    <div>
+        <button mat-mini-fab routerLink="/insumo/" style="background-color: brown;">
+            <i matTooltip="Voltar" class="material-icons">
+                arrow_back
+            </i>
+        </button>
+    </div>
+</mat-card>
+
+<form [formGroup]="form" novalidate style="margin: 20px;">
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+        <mat-form-field class="full-width" style="margin-top: 20px;">
+            <input matInput placeholder="Identificação" formControlName="identificacao">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <textarea matInput placeholder="Ingredientes Ativos" formControlName="ingredientesAtivos"></textarea>
+        </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-around center" >
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Aplicação" formControlName="aplicacao">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Formulação" formControlName="formulacao">
+        </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-around center" >
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Classe Agronômica" formControlName="classeAgronomica">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Modo de Ação" formControlName="modoDeAcao">
+        </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-around center" >
+        <mat-form-field class="full-width">
+            <input type="number" matInput placeholder="Quantidade" formControlName="quantidade">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Unidade de Medida</mat-label>
+            <mat-select formControlName="idUnidadeDeMedida">
+
+                <mat-option *ngFor="let un of unidades" [value]="un.id">
+                    {{ un.abreviacao }}
+                </mat-option>
+
+            </mat-select>
+
+        </mat-form-field>
+    </div>
+
+    <div fxLayoutAlign="center" style="margin-top: 20px;">
+            <button mat-raised-button color="primary" [disabled]="form.invalid"
+                 style="margin-right: 25px;" (click)="atualizar()">Salvar</button>
+
+        <button mat-raised-button color="warn" routerLink="/insumo/">Cancelar</button>
+    </div>
+</form>

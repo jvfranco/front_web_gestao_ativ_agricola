@@ -1,0 +1,44 @@
+<mat-card class="card-home mat-elevation-z3">
+    <div>
+        <mat-card-title>Safra</mat-card-title>
+        <mat-card-subtitle>Atualização de Safra</mat-card-subtitle>
+    </div>
+    <div>
+        <button mat-mini-fab routerLink="/safra/" style="background-color: brown;">
+            <i matTooltip="Voltar" class="material-icons">
+                arrow_back
+            </i>
+        </button>
+    </div>
+</mat-card>
+
+<form [formGroup]="form" fxLayoutAlign="center" novalidate style="margin: 20px;">
+    <mat-list>
+        <mat-list-item>
+            <mat-form-field>
+                <input matInput placeholder="Identificação" formControlName="identificacao">
+            </mat-form-field>
+        </mat-list-item>
+
+        <mat-list-item>
+            <mat-form-field>
+                <input type="date" matInput placeholder="Data Inicial" formControlName="dataInicial">
+            </mat-form-field>
+        </mat-list-item>
+
+        <mat-list-item>
+            <mat-form-field>
+                <input type="date" matInput placeholder="Data Final" formControlName="dataFinal">
+            </mat-form-field>
+        </mat-list-item>
+
+        <mat-list-item fxLayoutAlign="center">
+            <button mat-raised-button color="primary" [disabled]="form.invalid"
+                 style="margin-right: 25px;" (click)="atualizar()">Salvar</button>
+
+            <button mat-raised-button color="warn" routerLink="/safra/">Cancelar</button>
+        </mat-list-item>
+    </mat-list>
+</form>
+
+

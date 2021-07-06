@@ -5,19 +5,19 @@ import { Observable } from 'rxjs/Observable';
 
 import { environment as env } from '../../../environments/environment';
 
-import { UnidadeDeMedida } from '../models';
+import { Cultura } from '../models';
 import { Paginacao } from 'src/app/core';
 
 @Injectable()
-export class UnidadeDeMedidaService {
+export class CulturaService {
 
-  private readonly PATH: string = 'unidadeDeMedida';
+  private readonly PATH: string = 'cultura';
   private readonly GET_ALL_PATH: string = '/todos';
   private readonly ID_PATH: string = '/{id}';
 
   constructor(private http: HttpClient) { } 
 
-  retornarTodasUnidades(paginacao: Paginacao): Observable<any> {
+  retornarTodasCultura(paginacao?: Paginacao): Observable<any> {
     let url = env.baseUrl + this.PATH + this.GET_ALL_PATH;
 
     if (paginacao != null) {
@@ -29,24 +29,19 @@ export class UnidadeDeMedidaService {
     return this.http.get(url);
   }
   
-  retornarUnidadeDetalhada(id: string): Observable<any> {
+  retornarCulturaDetalhada(id: string): Observable<any> {
     return this.http.get(env.baseUrl + this.PATH + this.ID_PATH.replace('{id}', id));
   }
 
-  salvarNovaUnidade(unidade: UnidadeDeMedida): Observable<any> {
-    return this.http.post(env.baseUrl + this.PATH, unidade);
+  salvarNovaCultura(cultura: Cultura): Observable<any> {
+    return this.http.post(env.baseUrl + this.PATH, cultura);
   }
 
-  atualizarUnidade(id: string, unidade: UnidadeDeMedida): Observable<any> {
-    return this.http.put(env.baseUrl + this.PATH + this.ID_PATH.replace('{id}', id), unidade);
+  atualizarCultura(id: string, cultura: Cultura): Observable<any> {
+    return this.http.put(env.baseUrl + this.PATH + this.ID_PATH.replace('{id}', id), cultura);
   }
 
-  excluirUnidade(id: string): Observable<any> {
+  excluirCultura(id: string): Observable<any> {
     return this.http.delete(env.baseUrl + this.PATH + this.ID_PATH.replace('{id}', id))
   }
-
-  retornarTodasUnidadesSemPaginacao(): Observable<any> {
-    return this.http.get(env.baseUrl + this.PATH);
-  }
-
 }

@@ -1,51 +1,48 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-import { UnidadeDeMedidaService } from '../../services';
-import { UnidadeDeMedida } from '../../models';
+import { Router } from '@angular/router';
+import { Marca } from '../../models';
+import { MarcaService } from '../../services';
 
 @Component({
-  selector: 'app-cadastro',
-  templateUrl: './cadastro.component.html',
-  styleUrls: ['./cadastro.component.css']
+  selector: 'app-cadastro-marca',
+  templateUrl: './cadastro-marca.component.html',
+  styleUrls: ['./cadastro-marca.component.css']
 })
-export class CadastroComponent implements OnInit {
+export class CadastroMarcaComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
     private snackbar: MatSnackBar,
     private router: Router,
-    private service: UnidadeDeMedidaService
+    private service: MarcaService
   ) { }
 
   ngOnInit(): void {
   }
 
   form = this.fb.group({
-    abreviacao: ['', [Validators.required, Validators.maxLength(3)]],
-    descricao: ['', Validators.required]
+    nome: ['', Validators.required]
   })
 
-  salvarNovaUnidade() {
+  salvar() {
     if (this.form.invalid) {
       return;
     }
 
-    const unidadeDeMedida: UnidadeDeMedida = this.form.value;
+    const marca: Marca = this.form.value;
     let msg: string = '';
-    this.service.salvarNovaUnidade(unidadeDeMedida).subscribe(
+    this.service.salvarNovaMarca(marca).subscribe(
       data => {
         console.log(JSON.stringify(data))
-        msg = 'Unidade de Medida cadastrada com sucesso.';
+        msg = 'Marca cadastrada com sucesso.';
         this.snackbar.open(msg, 'Sucesso', {duration: 5000});
         this.form.reset();
       },
       err => {
         console.log(JSON.stringify(err));
-        msg = 'Erros.';
+        msg = 'Ocorreram erros no cadastro da marca.';
         this.snackbar.open(msg, 'Erro', {duration: 5000});
       }
     )
@@ -54,4 +51,6 @@ export class CadastroComponent implements OnInit {
   resetarForm() {
     this.form.reset();
   }
+
+
 }

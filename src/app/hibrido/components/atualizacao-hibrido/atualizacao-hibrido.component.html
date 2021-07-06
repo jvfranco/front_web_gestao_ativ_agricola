@@ -1,0 +1,57 @@
+<mat-card class="card-home mat-elevation-z3">
+    <div>
+        <mat-card-title>Híbrido</mat-card-title>
+        <mat-card-subtitle>Atualização de Híbrido</mat-card-subtitle>
+    </div>
+    <div>
+        <button mat-mini-fab routerLink="/hibrido/" style="background-color: brown;">
+            <i matTooltip="Voltar" class="material-icons">
+                arrow_back
+            </i>
+        </button>
+    </div>
+</mat-card>
+
+<form [formGroup]="form" fxLayoutAlign="center" novalidate style="margin: 20px;">
+    <mat-list>
+        <mat-list-item>
+            <mat-form-field>
+                <mat-label>Cultura</mat-label>
+                <mat-select formControlName="idCultura">
+
+                    <mat-option *ngFor="let cult of culturas" [value]="cult.id">
+                        {{ cult.nome }}
+                    </mat-option>
+
+                </mat-select>
+
+            </mat-form-field>
+        </mat-list-item>
+
+        <mat-list-item>
+            <mat-form-field>
+                <input matInput placeholder="Identificação" formControlName="identificacao">
+            </mat-form-field>
+        </mat-list-item>
+
+        <mat-list-item>
+            <mat-form-field>
+                <input matInput placeholder="Ciclo" formControlName="ciclo">
+            </mat-form-field>
+        </mat-list-item>
+
+        <mat-list-item>
+            <mat-form-field style="width: 500px; margin-top: 20px;">
+                <textarea matInput placeholder="Observações" formControlName="observacoes"></textarea>
+            </mat-form-field>
+        </mat-list-item>
+
+        <mat-list-item fxLayoutAlign="center" style="margin-top: 20px;">
+            <button mat-raised-button color="primary" [disabled]="form.invalid"
+                 style="margin-right: 25px;" (click)="atualizar()">Salvar</button>
+
+            <button mat-raised-button color="warn" routerLink="/hibrido/">Cancelar</button>
+        </mat-list-item>
+    </mat-list>
+</form>
+
