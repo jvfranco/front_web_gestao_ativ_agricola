@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Marca, MarcaService } from 'src/app/marca';
 import { UnidadeDeMedida, UnidadeDeMedidaService } from 'src/app/unidade-de-medida';
 import { Insumo } from '../../models';
 import { InsumoService } from '../../services';
@@ -15,6 +16,7 @@ export class AtualizacaoInsumoComponent implements OnInit {
 
   insumoID: any;
   unidades?: UnidadeDeMedida[];
+  marcas?: Marca[];
 
   constructor(
     private route: ActivatedRoute,
@@ -22,11 +24,13 @@ export class AtualizacaoInsumoComponent implements OnInit {
     private snackbar: MatSnackBar,
     private router: Router,
     private service: InsumoService,
-    private unService: UnidadeDeMedidaService
+    private unService: UnidadeDeMedidaService,
+    private marcaService: MarcaService
   ) { }
 
   ngOnInit(): void {
     this.retornarTodasUnidades();
+    this.retornarTodasMarcas();
     this.insumoID = this.route.snapshot.paramMap.get('insumoID');
     this.retornarDetalhado(this.insumoID);
   }
@@ -39,7 +43,8 @@ export class AtualizacaoInsumoComponent implements OnInit {
     classeAgronomica: ['', Validators.required],
     modoDeAcao: ['', Validators.required],
     quantidade: ['', Validators.required],
-    idUnidadeDeMedida: ['', Validators.required]
+    idUnidadeDeMedida: ['', Validators.required],
+    idMarca: ['', Validators.required]
   })
 
   retornarDetalhado(id: string) {
@@ -55,6 +60,7 @@ export class AtualizacaoInsumoComponent implements OnInit {
         this.form.get('modoDeAcao')?.setValue(data.modoDeAcao);
         this.form.get('quantidade')?.setValue(data.quantidade);
         this.form.get('idUnidadeDeMedida')?.setValue(data.unidadeDeMedida.id);
+        this.form.get('idMarca')?.setValue(data.marca.id);
       },
       err => {
         console.log(JSON.stringify(err));
@@ -96,6 +102,19 @@ export class AtualizacaoInsumoComponent implements OnInit {
       err => {
         console.log(JSON.stringify(err));
         this.snackbar.open('Ocorreram erros na busca das Unidades de Medida.', 'Erro', {duration: 5000});
+      }
+    )
+  }
+
+  retornarTodasMarcas() {
+    this.marcaService.retornarTodasMarcasSemPaginacao().subscribe(
+      data => {
+        console.log(data);
+        this.marcas = data;
+      },
+      err => {
+        console.log(JSON.stringify(err));
+        this.snackbar.open('Ocorreram erros na busca das Marcas.', 'Erro', {duration: 5000});
       }
     )
   }

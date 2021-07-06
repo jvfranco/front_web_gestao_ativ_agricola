@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cultura } from 'src/app/cultura';
+import { Marca, MarcaService } from 'src/app/marca';
 import { Hibrido } from '../../models';
 import { HibridoService } from '../../services';
 
@@ -15,17 +16,20 @@ export class AtualizacaoHibridoComponent implements OnInit {
 
   hibridoID: any;
   culturas?: Cultura[];
+  marcas?: Marca[];
 
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private snackbar: MatSnackBar,
     private router: Router,
-    private service: HibridoService
+    private service: HibridoService,
+    private marcaService: MarcaService
   ) { }
 
   ngOnInit(): void {
     this.retornarTodasCultura();
+    this.retornarTodasMarcas();
     this.hibridoID = this.route.snapshot.paramMap.get('hibridoID');
     this.retornarDetalhado(this.hibridoID);
   }
@@ -34,7 +38,8 @@ export class AtualizacaoHibridoComponent implements OnInit {
     identificacao: ['', Validators.required],
     idCultura: ['', Validators.required],
     ciclo: ['', Validators.required],
-    observacoes: ['']
+    observacoes: [''],
+    idMarca: ['', Validators.required]
   })
 
   retornarDetalhado(id: string) {
@@ -46,6 +51,7 @@ export class AtualizacaoHibridoComponent implements OnInit {
         this.form.get('idCultura')?.setValue(data.cultura.id);
         this.form.get('ciclo')?.setValue(data.ciclo);
         this.form.get('observacoes')?.setValue(data.observacoes);
+        this.form.get('idMarca')?.setValue(data.marca.id);
       },
       err => {
         console.log(JSON.stringify(err));
@@ -86,6 +92,19 @@ export class AtualizacaoHibridoComponent implements OnInit {
       err => {
         console.log(JSON.stringify(err));
         this.snackbar.open('Ocorreram erros na busca das Culturas.', 'Erro', {duration: 5000});
+      }
+    )
+  }
+
+  retornarTodasMarcas() {
+    this.marcaService.retornarTodasMarcasSemPaginacao().subscribe(
+      data => {
+        console.log(data);
+        this.marcas = data;
+      },
+      err => {
+        console.log(JSON.stringify(err));
+        this.snackbar.open('Ocorreram erros na busca das Marcas.', 'Erro', {duration: 5000});
       }
     )
   }

@@ -18,7 +18,7 @@ export class ListagemInsumoComponent implements OnInit {
   totalElements: any;
   dataSource !: MatTableDataSource<Insumo>;
 
-  displayedColumns: string[] = ['identificacao', 'ingredientesAtivos', 'formulacao', 'modoDeAcao', 'quantidade', 'unidadeDeMedida', 'acoes'];
+  displayedColumns: string[] = ['identificacao', 'ingredientesAtivos', 'formulacao', 'modoDeAcao', 'quantidade', 'unidadeDeMedida', 'marca', 'acoes'];
 
   constructor(
     private snackbar: MatSnackBar,

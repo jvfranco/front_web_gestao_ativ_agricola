@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Cultura, CulturaService } from 'src/app/cultura';
+import { Marca, MarcaService } from 'src/app/marca';
 import { CulturaDTO, Hibrido } from '../../models';
 import { HibridoService } from '../../services';
 
@@ -15,16 +16,19 @@ import { HibridoService } from '../../services';
 export class CadastroHibridoComponent implements OnInit {
 
   culturas?: CulturaDTO[];
+  marcas?: Marca[];
 
   constructor(
     private fb: FormBuilder,
     private snackbar: MatSnackBar,
     private router: Router,
-    private service: HibridoService
+    private service: HibridoService,
+    private marcaService: MarcaService
   ) { }
 
   ngOnInit(): void {
     this.retornarTodasCultura();
+    this.retornarTodasMarcas();
   }
 
   retornarTodasCultura() {
@@ -40,12 +44,26 @@ export class CadastroHibridoComponent implements OnInit {
     )
   }
 
+  retornarTodasMarcas() {
+    this.marcaService.retornarTodasMarcasSemPaginacao().subscribe(
+      data => {
+        console.log(data);
+        this.marcas = data;
+      },
+      err => {
+        console.log(JSON.stringify(err));
+        this.snackbar.open('Ocorreram erros na busca das Marcas.', 'Erro', {duration: 5000});
+      }
+    )
+  }
+
 
   form = this.fb.group({
     identificacao: ['', Validators.required],
     idCultura: ['', Validators.required],
     ciclo: ['', Validators.required],
-    observacoes: ['']
+    observacoes: [''],
+    idMarca: ['', Validators.required],
   })
 
   salvar() {

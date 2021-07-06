@@ -41,19 +41,31 @@
         <mat-form-field class="full-width">
             <input matInput placeholder="Modo de Ação" formControlName="modoDeAcao">
         </mat-form-field>
-    </div>
 
-    <div fxLayout="row" fxLayoutAlign="space-around center" >
         <mat-form-field class="full-width">
             <input type="number" matInput placeholder="Quantidade" formControlName="quantidade">
         </mat-form-field>
+    </div>
 
+    <div fxLayout="row" fxLayoutAlign="space-around center" >
         <mat-form-field class="full-width">
             <mat-label>Unidade de Medida</mat-label>
             <mat-select formControlName="idUnidadeDeMedida">
 
                 <mat-option *ngFor="let un of unidades" [value]="un.id">
                     {{ un.abreviacao }}
+                </mat-option>
+
+            </mat-select>
+
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Marca</mat-label>
+            <mat-select formControlName="idMarca">
+
+                <mat-option *ngFor="let marca of marcas" [value]="marca.id">
+                    {{ marca.nome }}
                 </mat-option>
 
             </mat-select>

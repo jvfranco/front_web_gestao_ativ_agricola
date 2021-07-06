@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Marca, MarcaService } from 'src/app/marca';
 import { UnidadeDeMedida, UnidadeDeMedidaService } from 'src/app/unidade-de-medida';
 import { Insumo } from '../../models';
 import { InsumoService } from '../../services';
@@ -14,17 +15,20 @@ import { InsumoService } from '../../services';
 export class CadastroInsumoComponent implements OnInit {
 
   unidades?: UnidadeDeMedida[];
+  marcas?: Marca[];
 
   constructor(
     private fb: FormBuilder,
     private snackbar: MatSnackBar,
     private router: Router,
     private service: InsumoService,
-    private unService: UnidadeDeMedidaService
+    private unService: UnidadeDeMedidaService,
+    private marcaService: MarcaService
   ) { }
 
   ngOnInit(): void {
     this.retornarTodasUnidades();
+    this.retornarTodasMarcas();
   }
 
   retornarTodasUnidades() {
@@ -40,6 +44,19 @@ export class CadastroInsumoComponent implements OnInit {
     )
   }
 
+  retornarTodasMarcas() {
+    this.marcaService.retornarTodasMarcasSemPaginacao().subscribe(
+      data => {
+        console.log(data);
+        this.marcas = data;
+      },
+      err => {
+        console.log(JSON.stringify(err));
+        this.snackbar.open('Ocorreram erros na busca das Marcas.', 'Erro', {duration: 5000});
+      }
+    )
+  }
+
 
   form = this.fb.group({
     identificacao: ['', Validators.required],
@@ -49,7 +66,8 @@ export class CadastroInsumoComponent implements OnInit {
     classeAgronomica: ['', Validators.required],
     modoDeAcao: ['', Validators.required],
     quantidade: ['', Validators.required],
-    idUnidadeDeMedida: ['', Validators.required]
+    idUnidadeDeMedida: ['', Validators.required],
+    idMarca: ['', Validators.required]
   })
 
   salvar() {

@@ -51,6 +51,11 @@
             <td mat-cell *matCellDef="let element"> {{element.unidadeDeMedida.abreviacao}} </td>
         </ng-container>
 
+        <ng-container matColumnDef="marca">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Marca </th>
+            <td mat-cell *matCellDef="let element"> {{element.marca.nome}} </td>
+        </ng-container>
+
         <ng-container matColumnDef="acoes" style="width: 15%;">
             <th mat-header-cell *matHeaderCellDef> Ações </th>
             <td mat-cell *matCellDef="let element">

@@ -8,6 +8,7 @@ export class Insumo {
         public classeAgronomica: string,
         public modoDeAcao: string,
         public quantidade: number,
-        public idUnidadeDeMedida: string
+        public idUnidadeDeMedida: string,
+        public idMarca: string
     ) {}
 }
