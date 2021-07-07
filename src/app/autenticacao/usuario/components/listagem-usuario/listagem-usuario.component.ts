@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Usuario, UsuarioService } from 'src/app/autenticacao';
+import { DetalheUsuarioComponent, Usuario, UsuarioService } from 'src/app/autenticacao';
 import { Paginacao } from 'src/app/core';
 
 @Component({
@@ -21,7 +22,9 @@ export class ListagemUsuarioComponent implements OnInit {
 
   constructor(
     private snackbar: MatSnackBar,
-    private service: UsuarioService
+    private service: UsuarioService,
+    public dialog: MatDialog
+
     ) { }
 
   ngOnInit(): void {
@@ -86,5 +89,16 @@ export class ListagemUsuarioComponent implements OnInit {
       }
     )
   };
+
+  openDialog(usuario?: any): void {
+    const dialogRef = this.dialog.open(DetalheUsuarioComponent, {
+      width: '400px',
+      data: usuario
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Sort } from '@angular/material/sort';
@@ -6,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Paginacao } from 'src/app/core';
 import { Insumo } from '../../models';
 import { InsumoService } from '../../services';
+import { DetalheInsumoComponent } from '../dialog';
 
 @Component({
   selector: 'app-listagem-insumo',
@@ -22,7 +24,8 @@ export class ListagemInsumoComponent implements OnInit {
 
   constructor(
     private snackbar: MatSnackBar,
-    private service: InsumoService
+    private service: InsumoService,
+    public dialog: MatDialog
     ) { }
 
   ngOnInit(): void {
@@ -87,5 +90,16 @@ export class ListagemInsumoComponent implements OnInit {
       }
     )
   };
+
+  openDialog(insumo?: any): void {
+    const dialogRef = this.dialog.open(DetalheInsumoComponent, {
+      width: '400px',
+      data: insumo
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 
 }

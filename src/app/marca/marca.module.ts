@@ -16,20 +16,25 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { LayoutModule } from '../layout';
-import { MarcaComponent } from './components';
 import { MarcaService } from './services';
-import { ListagemMarcaComponent } from './components/listagem-marca/listagem-marca.component';
-import { CadastroMarcaComponent } from './components/cadastro-marca/cadastro-marca.component';
-import { AtualizacaoMarcaComponent } from './components/atualizacao-marca/atualizacao-marca.component';
+import { 
+  AtualizacaoMarcaComponent,
+  CadastroMarcaComponent,
+  DetalheMarcaComponent,
+  ListagemMarcaComponent,
+  MarcaComponent,
+} from './components';
 
 @NgModule({
   declarations: [
     MarcaComponent,
     ListagemMarcaComponent,
     CadastroMarcaComponent,
-    AtualizacaoMarcaComponent
+    AtualizacaoMarcaComponent,
+    DetalheMarcaComponent
   ],
   imports: [
     CommonModule,
@@ -48,6 +53,7 @@ import { AtualizacaoMarcaComponent } from './components/atualizacao-marca/atuali
     MatCardModule,
     MatSortModule,
     MatSelectModule,
+    MatDialogModule,
 
     HttpClientModule
   ],

@@ -15,12 +15,14 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { 
   ListagemComponent, 
   CadastroComponent, 
   UnidadeDeMedidaComponent, 
-  AtualizacaoComponent } from './components';
+  AtualizacaoComponent,
+  DetalheUnidMedComponent } from './components';
 import { LayoutModule } from '../layout';
 import { UnidadeDeMedidaService } from './services';
 
@@ -29,7 +31,8 @@ import { UnidadeDeMedidaService } from './services';
     ListagemComponent,
     CadastroComponent,
     UnidadeDeMedidaComponent,
-    AtualizacaoComponent
+    AtualizacaoComponent,
+    DetalheUnidMedComponent
   ],
   imports: [
     CommonModule,
@@ -47,6 +50,7 @@ import { UnidadeDeMedidaService } from './services';
     LayoutModule,
     MatCardModule,
     MatSortModule,
+    MatDialogModule,
 
     HttpClientModule
   ],

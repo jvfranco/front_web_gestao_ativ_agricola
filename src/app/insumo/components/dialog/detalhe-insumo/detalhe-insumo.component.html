@@ -1,0 +1,16 @@
+<h1 mat-dialog-title><b>Detalhe: {{ data.identificacao }}</b></h1>
+<div mat-dialog-content>
+    <p><b>ID:</b> {{ data.id }}</p>
+    <p><b>Identificação:</b> {{ data.identificacao }}</p>
+    <p><b>Ingredientes Ativos:</b> {{ data.ingredientesAtivos }}</p>
+    <p><b>Aplicação:</b> {{ data.aplicacao }}</p>
+    <p><b>Formulação:</b> {{ data.formulacao }}</p>
+    <p><b>Classe Agronômica:</b> {{ data.classeAgronomica }}</p>
+    <p><b>Modo de Ação:</b> {{ data.modoDeAcao }}</p>
+    <p><b>Quantidade:</b> {{ data.quantidade }}</p>
+    <p><b>Un. de Medida:</b> {{ data.unidadeDeMedida.abreviacao }}</p>
+    <p><b>Marca:</b> {{ data.marca.nome }}</p>
+</div>
+<div mat-dialog-actions>
+    <button mat-mini-fab color="primary" (click)="onNoClick()" cdkFocusInitial>Ok</button>
+</div>

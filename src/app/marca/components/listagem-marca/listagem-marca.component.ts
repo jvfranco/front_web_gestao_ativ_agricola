@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Sort } from '@angular/material/sort';
@@ -6,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Paginacao } from 'src/app/core';
 import { Marca } from '../../models';
 import { MarcaService } from '../../services';
+import { DetalheMarcaComponent } from '../dialog';
 
 @Component({
   selector: 'app-listagem-marca',
@@ -22,7 +24,8 @@ export class ListagemMarcaComponent implements OnInit {
 
   constructor(
     private snackbar: MatSnackBar,
-    private service: MarcaService
+    private service: MarcaService,
+    public dialog: MatDialog
     ) { }
 
   ngOnInit(): void {
@@ -87,5 +90,16 @@ export class ListagemMarcaComponent implements OnInit {
       }
     )
   };
+
+  openDialog(marca?: Marca): void {
+    const dialogRef = this.dialog.open(DetalheMarcaComponent, {
+      width: '400px',
+      data: marca
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 
 }

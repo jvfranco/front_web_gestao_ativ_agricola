@@ -1,0 +1,12 @@
+<h1 mat-dialog-title><b>Detalhe: {{ data.modelo }}</b></h1>
+<div mat-dialog-content>
+    <p><b>ID:</b> {{ data.id }}</p>
+    <p><b>Modelo:</b> {{ data.modelo }}</p>
+    <p><b>Marca:</b> {{ data.marca.nome }}</p>
+    <p><b>Horímetro:</b> {{ data.horimetro }}</p>
+    <p><b>Combustível:</b> {{ data.combustivel }}</p>
+    <p><b>Potência:</b> {{ data.potencia }}</p>
+</div>
+<div mat-dialog-actions>
+    <button mat-mini-fab color="primary" (click)="onNoClick()" cdkFocusInitial>Ok</button>
+</div>

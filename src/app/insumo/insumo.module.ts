@@ -16,12 +16,17 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { LayoutModule } from '../layout';
-import { InsumoComponent } from './components';
-import { ListagemInsumoComponent } from './components/listagem-insumo/listagem-insumo.component';
-import { CadastroInsumoComponent } from './components/cadastro-insumo/cadastro-insumo.component';
-import { AtualizacaoInsumoComponent } from './components/atualizacao-insumo/atualizacao-insumo.component';
+import { 
+  AtualizacaoInsumoComponent,
+  CadastroInsumoComponent,
+  DetalheInsumoComponent,
+  InsumoComponent,
+  ListagemInsumoComponent
+} from './components';
+
 import { InsumoService } from './services';
 
 @NgModule({
@@ -29,7 +34,8 @@ import { InsumoService } from './services';
     InsumoComponent,
     ListagemInsumoComponent,
     CadastroInsumoComponent,
-    AtualizacaoInsumoComponent
+    AtualizacaoInsumoComponent,
+    DetalheInsumoComponent
   ],
   imports: [
     CommonModule,
@@ -48,6 +54,7 @@ import { InsumoService } from './services';
     MatCardModule,
     MatSortModule,
     MatSelectModule,
+    MatDialogModule,
 
     HttpClientModule
   ],

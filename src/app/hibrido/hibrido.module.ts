@@ -16,12 +16,16 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { LayoutModule } from '../layout';
-import { ListagemHibridoComponent } from './components/listagem-hibrido/listagem-hibrido.component';
-import { CadastroHibridoComponent } from './components/cadastro-hibrido/cadastro-hibrido.component';
-import { AtualizacaoHibridoComponent } from './components/atualizacao-hibrido/atualizacao-hibrido.component';
-import { HibridoComponent } from './components';
+import { 
+  AtualizacaoHibridoComponent,
+  CadastroHibridoComponent,
+  DetalheHibridoComponent,
+  HibridoComponent, 
+  ListagemHibridoComponent 
+} from './components';
 import { HibridoService } from './services';
 
 @NgModule({
@@ -29,7 +33,8 @@ import { HibridoService } from './services';
     HibridoComponent,
     ListagemHibridoComponent,
     CadastroHibridoComponent,
-    AtualizacaoHibridoComponent
+    AtualizacaoHibridoComponent,
+    DetalheHibridoComponent
   ],
   imports: [
     CommonModule,
@@ -48,6 +53,7 @@ import { HibridoService } from './services';
     MatCardModule,
     MatSortModule,
     MatSelectModule,
+    MatDialogModule,
 
     HttpClientModule
   ],

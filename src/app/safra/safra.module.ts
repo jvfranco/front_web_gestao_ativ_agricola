@@ -16,6 +16,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { LayoutModule } from '../layout';
 import { SafraService } from './services';
@@ -23,7 +24,8 @@ import {
   AtualizacaoSafraComponent, 
   CadastroSafraComponent, 
   ListagemSafraComponent, 
-  SafraComponent 
+  SafraComponent,
+  DetalheSafraComponent
 } from './components';
 
 
@@ -32,7 +34,8 @@ import {
     SafraComponent,
     ListagemSafraComponent,
     CadastroSafraComponent,
-    AtualizacaoSafraComponent
+    AtualizacaoSafraComponent,
+    DetalheSafraComponent
   ],
   imports: [
     CommonModule,
@@ -51,6 +54,7 @@ import {
     MatCardModule,
     MatSortModule,
     MatSelectModule,
+    MatDialogModule,
 
     HttpClientModule
   ],

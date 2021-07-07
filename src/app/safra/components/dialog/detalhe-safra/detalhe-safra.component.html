@@ -1,0 +1,10 @@
+<h1 mat-dialog-title><b>Detalhe: {{ data.identificacao }}</b></h1>
+<div mat-dialog-content>
+    <p><b>ID:</b> {{ data.id }}</p>
+    <p><b>Identificação:</b> {{ data.identificacao }}</p>
+    <p><b>Data Inicial:</b> {{ data.dataInicial | date: "dd/MM/yyyy" }}</p>
+    <p><b>Data Final:</b> {{ data.dataFinal | date: "dd/MM/yyyy" }}</p>
+</div>
+<div mat-dialog-actions>
+    <button mat-mini-fab color="primary" (click)="onNoClick()" cdkFocusInitial>Ok</button>
+</div>

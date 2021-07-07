@@ -16,11 +16,13 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { LayoutModule } from '../../layout';
 import { 
   AtualizacaoUsuarioComponent,
   CadastroUsuarioComponent,
+  DetalheUsuarioComponent,
   ListagemUsuarioComponent,
   UsuarioComponent 
 } from './components';
@@ -31,7 +33,8 @@ import { UsuarioService } from './services';
     UsuarioComponent,
     ListagemUsuarioComponent,
     CadastroUsuarioComponent,
-    AtualizacaoUsuarioComponent
+    AtualizacaoUsuarioComponent,
+    DetalheUsuarioComponent
   ],
   imports: [
     CommonModule,
@@ -50,6 +53,7 @@ import { UsuarioService } from './services';
     MatCardModule,
     MatSortModule,
     MatSelectModule,
+    MatDialogModule,
 
     HttpClientModule
   ],

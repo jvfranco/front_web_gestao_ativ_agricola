@@ -59,6 +59,9 @@
         <ng-container matColumnDef="acoes" style="width: 15%;">
             <th mat-header-cell *matHeaderCellDef> Ações </th>
             <td mat-cell *matCellDef="let element">
+                <i matTooltip="Informações do Item" class="material-icons" style="color: seagreen; margin-right: 10px; cursor: pointer;" (click)="openDialog(element)">
+                    info
+                </i>
                 <i matTooltip="Editar Item" class="material-icons" style="color: darkslateblue; margin-right: 10px; cursor: pointer;" routerLink="/insumo/atualizacao/{{element.id}}">
                     edit
                 </i>

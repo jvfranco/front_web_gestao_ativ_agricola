@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -8,6 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Paginacao } from '../../../core';
 import { UnidadeDeMedida } from '../../models';
 import { UnidadeDeMedidaService } from '../../services';
+import { DetalheUnidMedComponent } from '../dialog';
 
 @Component({
   selector: 'app-listagem',
@@ -24,7 +26,8 @@ export class ListagemComponent implements OnInit {
 
   constructor(
     private snackbar: MatSnackBar,
-    private service: UnidadeDeMedidaService) { }
+    private service: UnidadeDeMedidaService,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.paginacao.page = 0;
@@ -90,4 +93,14 @@ export class ListagemComponent implements OnInit {
   };
 
 
+  openDialog(unidadeDeMedida?: UnidadeDeMedida): void {
+    const dialogRef = this.dialog.open(DetalheUnidMedComponent, {
+      width: '400px',
+      data: unidadeDeMedida
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 }

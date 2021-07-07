@@ -44,7 +44,7 @@ export class AtualizacaoComponent implements OnInit {
       },
       err => {
         console.log(JSON.stringify(err));
-        msg = 'Erros.';
+        msg = 'Ocorreram erros ao buscar Unidade de Medida';
         this.snackbar.open(msg, 'Erro', {duration: 5000});
       } 
     );

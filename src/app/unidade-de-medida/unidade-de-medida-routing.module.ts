@@ -5,7 +5,8 @@ import {
     UnidadeDeMedidaComponent,
     CadastroComponent,
     ListagemComponent,
-    AtualizacaoComponent
+    AtualizacaoComponent,
+    DetalheUnidMedComponent
 } from './components';
 
 export const UnidadeDeMedidaRoutes: Routes = [

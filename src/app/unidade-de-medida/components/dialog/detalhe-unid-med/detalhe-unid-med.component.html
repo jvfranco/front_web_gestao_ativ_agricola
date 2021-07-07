@@ -1,0 +1,9 @@
+<h1 mat-dialog-title><b>Detalhe: {{ data.abreviacao }}</b></h1>
+<div mat-dialog-content>
+    <p><b>ID:</b> {{ data.id }}</p>
+    <p><b>Abreviação:</b> {{ data.abreviacao }}</p>
+    <p><b>Descrição:</b> {{ data.descricao }}</p>
+</div>
+<div mat-dialog-actions>
+    <button mat-mini-fab color="primary" (click)="onNoClick()" cdkFocusInitial>Ok</button>
+</div>

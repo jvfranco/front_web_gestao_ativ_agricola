@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Sort } from '@angular/material/sort';
@@ -6,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Paginacao } from 'src/app/core';
 import { Cultura } from '../../models';
 import { CulturaService } from '../../services';
+import { DetalheCulturaComponent } from '../dialog';
 
 @Component({
   selector: 'app-listagem-cultura',
@@ -22,7 +24,8 @@ export class ListagemCulturaComponent implements OnInit {
 
   constructor(
     private snackbar: MatSnackBar,
-    private service: CulturaService
+    private service: CulturaService,
+    public dialog: MatDialog
     ) { }
 
   ngOnInit(): void {
@@ -87,5 +90,16 @@ export class ListagemCulturaComponent implements OnInit {
       }
     )
   };
+
+  openDialog(cultura?: any): void {
+    const dialogRef = this.dialog.open(DetalheCulturaComponent, {
+      width: '400px',
+      data: cultura
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 
 }

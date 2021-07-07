@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Sort } from '@angular/material/sort';
@@ -6,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Paginacao } from 'src/app/core';
 import { Hibrido } from '../../models';
 import { HibridoService } from '../../services';
+import { DetalheHibridoComponent } from '../dialog';
 
 @Component({
   selector: 'app-listagem-hibrido',
@@ -22,7 +24,8 @@ export class ListagemHibridoComponent implements OnInit {
 
   constructor(
     private snackbar: MatSnackBar,
-    private service: HibridoService
+    private service: HibridoService,
+    public dialog: MatDialog
     ) { }
 
   ngOnInit(): void {
@@ -87,5 +90,16 @@ export class ListagemHibridoComponent implements OnInit {
       }
     )
   };
+
+  openDialog(hibrido?: any): void {
+    const dialogRef = this.dialog.open(DetalheHibridoComponent, {
+      width: '400px',
+      data: hibrido
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 
 }
