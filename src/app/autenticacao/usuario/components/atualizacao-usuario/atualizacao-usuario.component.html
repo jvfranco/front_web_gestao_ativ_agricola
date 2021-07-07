@@ -1,0 +1,65 @@
+<mat-card class="card-home mat-elevation-z3">
+    <div>
+        <mat-card-title>Usuário</mat-card-title>
+        <mat-card-subtitle>Cadastro de Usuário</mat-card-subtitle>
+    </div>
+    <div>
+        <button mat-mini-fab routerLink="/usuario/" style="background-color: brown;">
+            <i matTooltip="Voltar" class="material-icons">
+                arrow_back
+            </i>
+        </button>
+    </div>
+</mat-card>
+
+<form [formGroup]="form" novalidate style="margin: 20px;">
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Nome" formControlName="nome">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <input matInput placeholder="CPF" formControlName="cpf">
+        </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+        <mat-form-field class="full-width">
+            <input matInput placeholder="E-Mail" formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Telefone" formControlName="telefone">
+        </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Usuário" formControlName="usuario">
+        </mat-form-field>
+
+        <!-- <mat-form-field class="full-width">
+            <input matInput placeholder="Senha" formControlName="senha">
+        </mat-form-field> -->
+
+        <mat-form-field class="full-width">
+            <mat-label>Perfil</mat-label>
+            <mat-select formControlName="perfil">
+
+                <mat-option *ngFor="let perfil of perfis" [value]="perfil">
+                    {{ perfil }}
+                </mat-option>
+
+            </mat-select>
+
+        </mat-form-field>
+    </div>
+
+    <div fxLayoutAlign="center" style="margin-top: 20px;">
+        <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="atualizar()"
+            style="margin-right: 25px;">Salvar</button>
+
+        <button mat-raised-button color="warn" routerLink="/usuario/">Cancelar</button>
+    </div>
+
+</form>

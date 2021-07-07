@@ -17,19 +17,21 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 
-import { LayoutModule } from '../layout';
-import { InsumoComponent } from './components';
-import { ListagemInsumoComponent } from './components/listagem-insumo/listagem-insumo.component';
-import { CadastroInsumoComponent } from './components/cadastro-insumo/cadastro-insumo.component';
-import { AtualizacaoInsumoComponent } from './components/atualizacao-insumo/atualizacao-insumo.component';
-import { InsumoService } from './services';
+import { LayoutModule } from '../../layout';
+import { 
+  AtualizacaoUsuarioComponent,
+  CadastroUsuarioComponent,
+  ListagemUsuarioComponent,
+  UsuarioComponent 
+} from './components';
+import { UsuarioService } from './services';
 
 @NgModule({
   declarations: [
-    InsumoComponent,
-    ListagemInsumoComponent,
-    CadastroInsumoComponent,
-    AtualizacaoInsumoComponent
+    UsuarioComponent,
+    ListagemUsuarioComponent,
+    CadastroUsuarioComponent,
+    AtualizacaoUsuarioComponent
   ],
   imports: [
     CommonModule,
@@ -52,7 +54,7 @@ import { InsumoService } from './services';
     HttpClientModule
   ],
   providers: [
-    InsumoService
+    UsuarioService
   ]
 })
-export class InsumoModule { }
+export class UsuarioModule { }

@@ -1,0 +1,64 @@
+<mat-card class="card-home mat-elevation-z3">
+    <div>
+        <mat-card-title>Maquinário</mat-card-title>
+        <mat-card-subtitle>Atualização de Máquina</mat-card-subtitle>
+    </div>
+    <div>
+        <button mat-mini-fab routerLink="/maquina/" style="background-color: brown;">
+            <i matTooltip="Voltar" class="material-icons">
+                arrow_back
+            </i>
+        </button>
+    </div>
+</mat-card>
+
+<form [formGroup]="form" novalidate style="margin: 20px;">
+
+    <div fxLayout="row" fxLayoutAlign="space-around center" >
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Modelo" formControlName="modelo">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Marca</mat-label>
+            <mat-select formControlName="idMarca">
+
+                <mat-option *ngFor="let marca of marcas" [value]="marca.id">
+                    {{ marca.nome }}
+                </mat-option>
+
+            </mat-select>
+
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Potência" formControlName="potencia">
+        </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-around center" >
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Horímetro" formControlName="horimetro">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Combustível</mat-label>
+            <mat-select formControlName="combustivel">
+
+                <mat-option *ngFor="let combustivel of combustiveis" [value]="combustivel">
+                    {{ combustivel }}
+                </mat-option>
+
+            </mat-select>
+
+        </mat-form-field>
+    </div>
+
+    <div fxLayoutAlign="center" style="margin-top: 20px;">
+        <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="atualizar()"
+            style="margin-right: 25px;">Salvar</button>
+
+        <button mat-raised-button color="warn" routerLink="/maquina/">Cancelar</button>
+    </div>
+</form>
+
