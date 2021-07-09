@@ -2,21 +2,21 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Paginacao } from 'src/app/core';
-import { environment as env } from '../../../../environments/environment';
-import { Usuario } from '../models';
+import { environment as env } from '../../../environments/environment';
+import { Propriedade } from '../models';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsuarioService {
+export class PropriedadeService {
 
-  private readonly PATH: string = 'usuario';
+  private readonly PATH: string = 'propriedade';
   private readonly GET_ALL_PATH: string = '/todos';
   private readonly ID_PATH: string = '/{id}';
 
   constructor(private http: HttpClient) { } 
 
-  retornarTodosUsuarios(paginacao?: Paginacao): Observable<any> {
+  retornarTodosPropriedades(paginacao: Paginacao): Observable<any> {
     let url = env.baseUrl + this.PATH + this.GET_ALL_PATH;
 
     if (paginacao != null) {
@@ -28,19 +28,19 @@ export class UsuarioService {
     return this.http.get(url);
   }
   
-  retornarUsuarioDetalhado(id: string): Observable<any> {
+  retornarPropriedadeDetalhada(id: string): Observable<any> {
     return this.http.get(env.baseUrl + this.PATH + this.ID_PATH.replace('{id}', id));
   }
 
-  salvarNovoUsuario(usuario: Usuario): Observable<any> {
-    return this.http.post(env.baseUrl + this.PATH, usuario);
+  salvarNovaPropriedade(propriedade: Propriedade): Observable<any> {
+    return this.http.post(env.baseUrl + this.PATH, propriedade);
   }
 
-  atualizarUsuario(id: string, usuario: Usuario): Observable<any> {
-    return this.http.put(env.baseUrl + this.PATH + this.ID_PATH.replace('{id}', id), usuario);
+  atualizarPropriedade(id: string, propriedade: Propriedade): Observable<any> {
+    return this.http.put(env.baseUrl + this.PATH + this.ID_PATH.replace('{id}', id), propriedade);
   }
 
-  excluirUsuario(id: string): Observable<any> {
+  excluirPropriedade(id: string): Observable<any> {
     return this.http.delete(env.baseUrl + this.PATH + this.ID_PATH.replace('{id}', id))
   }
 }

@@ -48,7 +48,7 @@ export class CadastroMaquinaComponent implements OnInit {
     horimetro: ['', Validators.required],
     combustivel: ['', Validators.required],
     potencia: ['', Validators.required],
-  })
+  });
 
   salvar() {
     if (this.form.invalid) {
@@ -75,5 +75,7 @@ export class CadastroMaquinaComponent implements OnInit {
   resetarForm() {
     this.form.reset();
   }
+
+  
 
 }

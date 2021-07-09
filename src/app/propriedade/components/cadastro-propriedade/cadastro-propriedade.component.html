@@ -1,0 +1,62 @@
+<mat-card class="card-home mat-elevation-z3">
+    <div>
+        <mat-card-title>Propriedade</mat-card-title>
+        <mat-card-subtitle>Cadastro de Propriedade</mat-card-subtitle>
+    </div>
+    <div>
+        <button mat-mini-fab routerLink="/propriedade/" style="background-color: brown;">
+            <i matTooltip="Voltar" class="material-icons">
+                arrow_back
+            </i>
+        </button>
+    </div>
+</mat-card>
+
+<form [formGroup]="form" novalidate style="margin: 20px;">
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+        <mat-form-field class="full-width"> 
+            <input matInput placeholder="Nome" formControlName="nome">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Proprietário</mat-label>
+            <mat-select formControlName="idProprietario">
+
+                <mat-option *ngFor="let prop of proprietarios" [value]="prop.id">
+                    {{ prop.nome }}
+                </mat-option>
+
+            </mat-select>
+
+        </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Área" formControlName="area">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Unidade de Medida</mat-label>
+            <mat-select formControlName="idUnidade">
+
+                <mat-option *ngFor="let med of unidades" [value]="med.id">
+                    {{ med.abreviacao }}
+                </mat-option>
+
+            </mat-select>
+
+        </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="center">
+        <button mat-raised-button class="button" (click)="openDialog()">
+            <i class="material-icons">
+                gps_fixed
+            </i>
+            Demarcar Área
+        </button>
+
+        <button mat-raised-button color="warn" (click)="resetarForm()">Cancelar</button>
+    </div>
+</form>

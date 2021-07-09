@@ -1,0 +1,17 @@
+table {
+    width: 100%;
+  }
+
+.card-home {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-height: 82px;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
