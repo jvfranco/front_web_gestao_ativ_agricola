@@ -4,27 +4,28 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { DetalheUsuarioComponent, Usuario, UsuarioService } from 'src/app/autenticacao';
 import { Paginacao } from 'src/app/core';
+import { Pessoa } from '../../models';
+import { PessoaService } from '../../services';
+import { DetalhePessoaComponent } from '../dialogs';
 
 @Component({
-  selector: 'app-listagem-usuario',
-  templateUrl: './listagem-usuario.component.html',
-  styleUrls: ['./listagem-usuario.component.css']
+  selector: 'app-listagem-pessoa',
+  templateUrl: './listagem-pessoa.component.html',
+  styleUrls: ['./listagem-pessoa.component.css']
 })
-export class ListagemUsuarioComponent implements OnInit {
+export class ListagemPessoaComponent implements OnInit {
 
   paginacao: Paginacao = {};
   totalElements: any;
-  dataSource !: MatTableDataSource<Usuario>;
+  dataSource !: MatTableDataSource<Pessoa>;
 
-  displayedColumns: string[] = ['nome', 'usuario', 'perfil' ,'acoes'];
+  displayedColumns: string[] = ['nome', 'telefone', 'email', 'ocupacao', 'acoes'];
 
   constructor(
     private snackbar: MatSnackBar,
-    private service: UsuarioService,
+    private service: PessoaService,
     public dialog: MatDialog
-
     ) { }
 
   ngOnInit(): void {
@@ -32,7 +33,7 @@ export class ListagemUsuarioComponent implements OnInit {
     this.paginacao.size = 10;
     this.paginacao.sort = 'id';
     this.paginacao.direction = 'ASC';
-    this.retornarTodas();
+    this.retornarTodos();
   }
 
   applyFilter(event: Event) {
@@ -44,8 +45,8 @@ export class ListagemUsuarioComponent implements OnInit {
     }
   }
 
-  retornarTodas() {
-    this.service.retornarTodosUsuarios(this.paginacao).subscribe(
+  retornarTodos() {
+    this.service.retornarTodasPessoas(this.paginacao).subscribe(
       data => {
         this.paginacao.totalElements = data.totalElements;
         console.log(data);
@@ -54,14 +55,14 @@ export class ListagemUsuarioComponent implements OnInit {
       },
       err => {
         console.log(JSON.stringify(err));
-        this.snackbar.open('Ocorreram erros na busca dos Usuários.', 'Erro', {duration: 5000});
+        this.snackbar.open('Ocorreram erros na busca das Pessoas.', 'Erro', {duration: 5000});
       }
     )
   }
 
   paginar(pageEvent: PageEvent) {
     this.paginacao.page = pageEvent.pageIndex;
-    this.retornarTodas();
+    this.retornarTodos();
   }
 
   ordenar(sort: Sort) {
@@ -70,30 +71,30 @@ export class ListagemUsuarioComponent implements OnInit {
       this.paginacao.direction = sort.direction.toUpperCase();
     }
 
-    this.retornarTodas();
+    this.retornarTodos();
   }
 
   excluir(id: string) {
     let msg: string;
-    this.service.excluirUsuario(id).subscribe(
+    this.service.excluirPessoa(id).subscribe(
       data => {
-        console.log(data);
-        this.retornarTodas();
-        msg = 'Usuário excluído com sucesso.';
+        console.log('Exclusão' + data);
+        this.retornarTodos();
+        msg = 'Pessoa excluída com sucesso.';
         this.snackbar.open(msg, 'Sucesso', {duration: 5000});
       },
       err => {
         console.log(JSON.stringify(err));
-        msg = 'Erro na exclusão do Usuário.';
+        msg = 'Erro na exclusão da Pessoa.';
         this.snackbar.open(msg, 'Erro', {duration: 5000});
       }
     )
   };
 
-  openDialog(usuario?: any): void {
-    const dialogRef = this.dialog.open(DetalheUsuarioComponent, {
+  openDialog(pessoa?: any): void {
+    const dialogRef = this.dialog.open(DetalhePessoaComponent, {
       width: '400px',
-      data: usuario
+      data: pessoa
     });
 
     dialogRef.afterClosed().subscribe(result => {

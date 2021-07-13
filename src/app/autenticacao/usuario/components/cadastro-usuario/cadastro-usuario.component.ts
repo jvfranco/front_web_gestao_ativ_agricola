@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Perfil } from 'src/app/autenticacao';
+import { Pessoa, PessoaService } from 'src/app/pessoa';
 import { Usuario } from '../../models';
 import { UsuarioService } from '../../services';
 
@@ -15,22 +16,34 @@ export class CadastroUsuarioComponent implements OnInit {
 
   perfis: Perfil[] = [Perfil.ADMINISTRADOR, Perfil.USUARIO];
   visibilidade = true;
+  pessoas?: Pessoa[];
 
   constructor(
     private fb: FormBuilder,
     private snackbar: MatSnackBar,
     private router: Router,
-    private service: UsuarioService
+    private service: UsuarioService,
+    private pesService: PessoaService
   ) { }
 
   ngOnInit(): void {
+    this.buscarPessoas();
+  }
+
+  buscarPessoas() {
+    this.pesService.retornarTodasPessoasSemPaginacao().subscribe(
+      data => {
+        this.pessoas = data;
+      },
+      err => {
+        console.log(JSON.stringify(err));
+        this.snackbar.open('Ocorreram erros na busca das Pessoas.', 'Erro', {duration: 5000});
+      }
+    )
   }
 
   form = this.fb.group({
-    nome: ['', Validators.required],
-    cpf: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    telefone: ['', Validators.required],
+    pessoa: ['', Validators.required],
     usuario: ['', Validators.required],
     senha: ['', Validators.required],
     perfil: ['', Validators.required],
@@ -42,6 +55,7 @@ export class CadastroUsuarioComponent implements OnInit {
     }
 
     const usuario: Usuario = this.form.value;
+    console.log(`USUARIO: ${JSON.stringify(usuario)}`);
     let msg: string = '';
     this.service.salvarNovoUsuario(usuario).subscribe(
       data => {

@@ -1,0 +1,13 @@
+.full-width {
+    width: 50%;
+    font-size: medium;
+    margin-left: 25px;
+    color: black;
+  }
+
+  .card-home {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-height: 82px;
+  }

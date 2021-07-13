@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Perfil } from 'src/app/autenticacao';
+import { Pessoa, PessoaService } from 'src/app/pessoa';
 import { Usuario } from '../../models';
 import { UsuarioService } from '../../services';
 
@@ -15,25 +16,37 @@ export class AtualizacaoUsuarioComponent implements OnInit {
 
   perfis: Perfil[] = [Perfil.ADMINISTRADOR, Perfil.USUARIO];
   usuarioID: any;
+  pessoas?: Pessoa[];
 
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private snackbar: MatSnackBar,
     private router: Router,
-    private service: UsuarioService
+    private service: UsuarioService,
+    private pesService: PessoaService
   ) { }
 
   ngOnInit(): void {
     this.usuarioID = this.route.snapshot.paramMap.get('usuarioID');
     this.retornarDetalhado(this.usuarioID);
+    this.buscarPessoas();
+  }
+
+  buscarPessoas() {
+    this.pesService.retornarTodasPessoasSemPaginacao().subscribe(
+      data => {
+        this.pessoas = data;
+      },
+      err => {
+        console.log(JSON.stringify(err));
+        this.snackbar.open('Ocorreram erros na busca das Pessoas.', 'Erro', {duration: 5000});
+      }
+    )
   }
 
   form = this.fb.group({
-    nome: ['', Validators.required],
-    cpf: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    telefone: ['', Validators.required],
+    pessoa: ['', Validators.required],
     usuario: ['', Validators.required],
     perfil: ['', Validators.required]
   })
@@ -43,10 +56,7 @@ export class AtualizacaoUsuarioComponent implements OnInit {
     this.service.retornarUsuarioDetalhado(id).subscribe(
       data => {
         console.log(JSON.stringify(data));
-        this.form.get('nome')?.setValue(data.nome);
-        this.form.get('cpf')?.setValue(data.cpf);
-        this.form.get('email')?.setValue(data.email);
-        this.form.get('telefone')?.setValue(data.telefone);
+        this.form.get('pessoa')?.setValue(data.pessoa);
         this.form.get('usuario')?.setValue(data.usuario);
         switch (data.perfil) {
           case 'ADMINISTRADOR':

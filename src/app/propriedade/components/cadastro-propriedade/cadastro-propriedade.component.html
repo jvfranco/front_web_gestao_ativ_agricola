@@ -32,13 +32,20 @@
     </div>
 
     <div fxLayout="row" fxLayoutAlign="space-around center">
+        <button mat-raised-button class="button" (click)="openDialog()">
+            <i class="material-icons">
+                gps_fixed
+            </i>
+            Marcar Área
+        </button>
+
         <mat-form-field class="full-width">
-            <input matInput placeholder="Área" formControlName="area">
+            <input matInput placeholder="Área" formControlName="area" [disabled]="disabled"> 
         </mat-form-field>
 
         <mat-form-field class="full-width">
             <mat-label>Unidade de Medida</mat-label>
-            <mat-select formControlName="idUnidade">
+            <mat-select formControlName="idUnidade" [disabled]="disabled">
 
                 <mat-option *ngFor="let med of unidades" [value]="med.id">
                     {{ med.abreviacao }}
@@ -50,12 +57,8 @@
     </div>
 
     <div fxLayout="row" fxLayoutAlign="center">
-        <button mat-raised-button class="button" (click)="openDialog()">
-            <i class="material-icons">
-                gps_fixed
-            </i>
-            Demarcar Área
-        </button>
+        <button mat-raised-button color="primary" [disabled]="form.invalid"
+                (click)="salvar()" style="margin-right: 25px;">Salvar</button>
 
         <button mat-raised-button color="warn" (click)="resetarForm()">Cancelar</button>
     </div>

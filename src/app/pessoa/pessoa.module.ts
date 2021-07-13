@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MatInputModule } from '@angular/material/input';
@@ -19,28 +19,25 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { LayoutModule } from '../layout';
-import { PropriedadeService } from './services';
+import { PessoaService } from './services';
 import { 
-  AtualizacaoPropriedadeComponent, 
-  CadastroPropriedadeComponent, 
-  DetalhePropriedadeComponent, 
-  ListagemPropriedadeComponent, 
-  MapaPropriedadeComponent, 
-  PropriedadeComponent 
+  ListagemPessoaComponent,
+  CadastroPessoaComponent,
+  AtualizacaoPessoaComponent,
+  DetalhePessoaComponent,
+  PessoaComponent
 } from './components';
 
 @NgModule({
   declarations: [
-    PropriedadeComponent,
-    ListagemPropriedadeComponent,
-    CadastroPropriedadeComponent,
-    AtualizacaoPropriedadeComponent,
-    DetalhePropriedadeComponent,
-    MapaPropriedadeComponent
+    PessoaComponent,
+    ListagemPessoaComponent,
+    CadastroPessoaComponent,
+    AtualizacaoPessoaComponent,
+    DetalhePessoaComponent
   ],
   imports: [
     CommonModule,
-    FormsModule,
     LayoutModule,
     RouterModule,
     ReactiveFormsModule,
@@ -61,7 +58,7 @@ import {
     HttpClientModule
   ],
   providers: [
-    PropriedadeService
+    PessoaService
   ]
 })
-export class PropriedadeModule { }
+export class PessoaModule { }

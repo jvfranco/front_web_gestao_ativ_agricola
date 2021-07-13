@@ -15,32 +15,16 @@
 <form [formGroup]="form" novalidate style="margin: 20px;">
     <div fxLayout="row" fxLayoutAlign="space-around center">
         <mat-form-field class="full-width">
-            <input matInput placeholder="Nome" formControlName="nome">
-        </mat-form-field>
+            <mat-label>Pessoa</mat-label>
+            <mat-select formControlName="pessoa">
 
-        <mat-form-field class="full-width">
-            <input matInput placeholder="CPF" formControlName="cpf">
-        </mat-form-field>
-    </div>
+                <mat-option *ngFor="let pessoa of pessoas" [value]="pessoa">
+                    {{ pessoa.nome }}
+                </mat-option>
 
-    <div fxLayout="row" fxLayoutAlign="space-around center">
-        <mat-form-field class="full-width">
-            <input matInput placeholder="E-Mail" formControlName="email">
-        </mat-form-field>
+            </mat-select>
 
-        <mat-form-field class="full-width">
-            <input matInput placeholder="Telefone" formControlName="telefone">
         </mat-form-field>
-    </div>
-
-    <div fxLayout="row" fxLayoutAlign="space-around center">
-        <mat-form-field class="full-width">
-            <input matInput placeholder="Usuário" formControlName="usuario">
-        </mat-form-field>
-
-        <!-- <mat-form-field class="full-width">
-            <input matInput placeholder="Senha" formControlName="senha">
-        </mat-form-field> -->
 
         <mat-form-field class="full-width">
             <mat-label>Perfil</mat-label>
@@ -53,6 +37,17 @@
             </mat-select>
 
         </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Usuário" formControlName="usuario">
+        </mat-form-field>
+
+        <!-- <mat-form-field class="full-width">
+            <input matInput placeholder="Senha" formControlName="senha">
+        </mat-form-field> -->
+
     </div>
 
     <div fxLayoutAlign="center" style="margin-top: 20px;">
