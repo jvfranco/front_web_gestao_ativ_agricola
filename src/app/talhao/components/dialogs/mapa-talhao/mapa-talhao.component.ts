@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { Propriedade } from 'src/app/propriedade/models';
+import { Talhao } from 'src/app/talhao/models';
 import { environment as env } from '../../../../../environments/environment';
 
 import Map from 'ol/Map';
@@ -19,16 +19,19 @@ import GeoJSON from 'ol/format/GeoJSON';
 import Style from 'ol/style/Style';
 import Stroke from 'ol/style/Stroke';
 import Fill from 'ol/style/Fill';
+import { Propriedade, PropriedadeService } from 'src/app/propriedade';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
-  selector: 'app-mapa-propriedade',
-  templateUrl: './mapa-propriedade.component.html',
-  styleUrls: ['./mapa-propriedade.component.css']
+  selector: 'app-mapa-talhao',
+  templateUrl: './mapa-talhao.component.html',
+  styleUrls: ['./mapa-talhao.component.css']
 })
-export class MapaPropriedadeComponent implements OnInit {
+export class MapaTalhaoComponent implements OnInit {
 
   source = new VectorSource();
+  sourceDraw = new VectorSource();
   draw!: Draw;
   geoLocalizacao!: string;
   latitude!: number;
@@ -37,10 +40,13 @@ export class MapaPropriedadeComponent implements OnInit {
   area: any;
   coordenadas: any;
   satLayer!: TileLayer;
+  propriedade!: Propriedade;
 
   constructor(
-    public dialogRef: MatDialogRef<MapaPropriedadeComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Propriedade) { }
+    public dialogRef: MatDialogRef<MapaTalhaoComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Talhao,
+    private service: PropriedadeService,
+    private snackbar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.obterGeolocalizacao();
@@ -69,10 +75,10 @@ export class MapaPropriedadeComponent implements OnInit {
   });
 
   geraVectorLayer(): VectorLayer {
-    if (this.data.coordenadas) {
+    if (this.data.propriedade.coordenadas) {
       return new VectorLayer({
         source: new VectorSource({
-          features: new GeoJSON().readFeatures(this.data.coordenadas)
+          features: new GeoJSON().readFeatures(this.data.propriedade.coordenadas)
         }),
         style: this.style
       });
@@ -82,9 +88,9 @@ export class MapaPropriedadeComponent implements OnInit {
     })
   }
 
-  // vectorLayer: VectorLayer = new VectorLayer({
-  //   source: this.source
-  // });
+  vectorLayerDraw: VectorLayer = new VectorLayer({
+    source: this.sourceDraw
+  });
 
   view: View = new View({
     center: olProj.fromLonLat([-50.4227242924097, -22.66134868581503]),
@@ -110,7 +116,7 @@ export class MapaPropriedadeComponent implements OnInit {
   geraMapa() {
     this.map = new Map({
       target: 'ol-map',
-      layers: [this.rasterLayer, this.geraVectorLayer()],
+      layers: [this.rasterLayer, this.geraVectorLayer(), this.vectorLayerDraw],
       view: this.view
     });
     this.addInteraction();
@@ -118,7 +124,7 @@ export class MapaPropriedadeComponent implements OnInit {
 
   addInteraction() {
     this.draw = new Draw({
-      source: this.source,
+      source: this.sourceDraw,
       type: GeometryType.POLYGON
     });
     this.map.addInteraction(this.draw);
@@ -141,4 +147,5 @@ export class MapaPropriedadeComponent implements OnInit {
       }
     });
   }
+
 }

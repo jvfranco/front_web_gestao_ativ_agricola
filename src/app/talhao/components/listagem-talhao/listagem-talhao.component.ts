@@ -5,26 +5,26 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Paginacao } from 'src/app/core';
-import { Propriedade } from '../../models';
-import { PropriedadeService } from '../../services';
-import { DetalhePropriedadeComponent } from '../dialog';
+import { Talhao } from '../../models';
+import { TalhaoService } from '../../services';
+import { DetalheTalhaoComponent } from '../dialogs';
 
 @Component({
-  selector: 'app-listagem-propriedade',
-  templateUrl: './listagem-propriedade.component.html',
-  styleUrls: ['./listagem-propriedade.component.css']
+  selector: 'app-listagem-talhao',
+  templateUrl: './listagem-talhao.component.html',
+  styleUrls: ['./listagem-talhao.component.css']
 })
-export class ListagemPropriedadeComponent implements OnInit {
+export class ListagemTalhaoComponent implements OnInit {
 
   paginacao: Paginacao = {};
   totalElements: any;
-  dataSource !: MatTableDataSource<Propriedade>;
+  dataSource !: MatTableDataSource<Talhao>;
 
-  displayedColumns: string[] = ['nome', 'proprietario', 'area', 'acoes'];
+  displayedColumns: string[] = ['identificacao', 'area', 'tipoSolo', 'propriedade', 'acoes'];
 
   constructor(
     private snackbar: MatSnackBar,
-    private service: PropriedadeService,
+    private service: TalhaoService,
     public dialog: MatDialog
     ) { }
 
@@ -46,7 +46,7 @@ export class ListagemPropriedadeComponent implements OnInit {
   }
 
   retornarTodas() {
-    this.service.retornarTodosPropriedades(this.paginacao).subscribe(
+    this.service.retornarTodosTalhoes(this.paginacao).subscribe(
       data => {
         this.paginacao.totalElements = data.totalElements;
         console.log(data);
@@ -55,7 +55,7 @@ export class ListagemPropriedadeComponent implements OnInit {
       },
       err => {
         console.log(JSON.stringify(err));
-        this.snackbar.open('Ocorreram erros na busca das Propriedades.', 'Erro', {duration: 5000});
+        this.snackbar.open('Ocorreram erros na busca de Talhões.', 'Erro', {duration: 5000});
       }
     )
   }
@@ -76,31 +76,30 @@ export class ListagemPropriedadeComponent implements OnInit {
 
   excluir(id: string) {
     let msg: string;
-    this.service.excluirPropriedade(id).subscribe(
+    this.service.excluirTalhao(id).subscribe(
       data => {
         console.log(data);
         this.retornarTodas();
-        msg = 'Propriedade excluída com sucesso.';
+        msg = 'Talhão excluído com sucesso.';
         this.snackbar.open(msg, 'Sucesso', {duration: 5000});
       },
       err => {
         console.log(JSON.stringify(err));
-        msg = 'Erro na exclusão da Propriedade.';
+        msg = 'Erro na exclusão do Talhão.';
         this.snackbar.open(msg, 'Erro', {duration: 5000});
       }
     )
   };
 
-  openDialog(propriedade?: any): void {
-    const dialogRef = this.dialog.open(DetalhePropriedadeComponent, {
+  openDialog(talhao?: any): void {
+    const dialogRef = this.dialog.open(DetalheTalhaoComponent, {
       width: '400px',
-      data: propriedade
+      data: talhao
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
   }
-
 
 }

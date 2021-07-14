@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Paginacao } from 'src/app/core';
 import { environment as env } from '../../../environments/environment';
-import { Pessoa } from '../models';
+import { Ocupacao, Pessoa } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,7 @@ export class PessoaService {
   private readonly PATH: string = 'pessoa';
   private readonly GET_ALL_PATH: string = '/todos';
   private readonly ID_PATH: string = '/{id}';
+  private readonly PATH_OCUP = '/ocup='
 
   constructor(private http: HttpClient) { } 
 
@@ -30,6 +31,10 @@ export class PessoaService {
   
   retornarPessoaDetalhada(id: string): Observable<any> {
     return this.http.get(env.baseUrl + this.PATH + this.ID_PATH.replace('{id}', id));
+  }
+
+  retornarTodasPessoasPorOcupacao(ocupacao: Ocupacao): Observable<any> {
+    return this.http.get(env.baseUrl + this.PATH + this.PATH_OCUP + ocupacao);
   }
 
   retornarTodasPessoasSemPaginacao(): Observable<any> {

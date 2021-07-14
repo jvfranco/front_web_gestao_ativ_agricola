@@ -2,8 +2,9 @@
 <div mat-dialog-content>
     <p><b>ID:</b> {{ data.id }}</p>
     <p><b>Nome:</b> {{ data.nome }}</p>
-    <p><b>ID Proprietário:</b> {{ data.idProprietario }}</p>
-    <p><b>Nome Proprietário:</b> {{ data.nomeProprietario }}</p>
+    <p><b>ID Proprietário:</b> {{ data.proprietario.id }}</p>
+    <p><b>Nome Proprietário:</b> {{ data.proprietario.nome }}</p>
+    <p><b>Área:</b> {{ data.area }} {{ data.unidadeDeMedida.abreviacao }}</p>
 </div>
 <div mat-dialog-actions>
     <button mat-mini-fab color="primary" (click)="onNoClick()" cdkFocusInitial>Ok</button>

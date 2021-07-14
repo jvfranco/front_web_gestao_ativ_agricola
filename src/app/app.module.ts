@@ -16,6 +16,7 @@ import { SafraModule, SafraRoutingModule } from './safra';
 import { MaquinaModule, MaquinaRoutingModule } from './maquina';
 import { PropriedadeModule, PropriedadeRoutingModule } from './propriedade';
 import { PessoaModule, PessoaRoutingModule } from './pessoa';
+import { TalhaoModule, TalhaoRoutingModule } from './talhao';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,8 @@ import { PessoaModule, PessoaRoutingModule } from './pessoa';
     PropriedadeRoutingModule,
     PessoaModule,
     PessoaRoutingModule,
+    TalhaoModule,
+    TalhaoRoutingModule,
     
     AppRoutingModule
   ],
