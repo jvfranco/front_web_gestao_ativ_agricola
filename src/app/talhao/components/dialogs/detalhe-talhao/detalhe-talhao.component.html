@@ -1,1 +1,12 @@
-<p>detalhe-talhao works!</p>
+<h1 mat-dialog-title><b>Detalhe: {{ data.identificacao }}</b></h1>
+<div mat-dialog-content>
+    <p><b>ID:</b> {{ data.id }}</p>
+    <p><b>Identificação:</b> {{ data.identificacao }}</p>
+    <p><b>ID Propriedade:</b> {{ data.propriedade.id }}</p>
+    <p><b>Nome Propriedade:</b> {{ data.propriedade.nome }}</p>
+    <p><b>Área:</b> {{ data.area }} {{ data.unidadeDeMedida.abreviacao }}</p>
+    <p><b>Solo:</b> {{ data.tipoSolo }}</p>
+</div>
+<div mat-dialog-actions>
+    <button mat-mini-fab color="primary" (click)="onNoClick()" cdkFocusInitial>Ok</button>
+</div>

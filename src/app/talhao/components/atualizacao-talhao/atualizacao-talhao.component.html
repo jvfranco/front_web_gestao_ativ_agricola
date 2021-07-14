@@ -1,1 +1,77 @@
-<p>atualizacao-talhao works!</p>
+<mat-card class="card-home mat-elevation-z3">
+    <div>
+        <mat-card-title>Talhão</mat-card-title>
+        <mat-card-subtitle>Cadastro de Talhão</mat-card-subtitle>
+    </div>
+    <div>
+        <button mat-mini-fab routerLink="/talhao/" style="background-color: brown;">
+            <i matTooltip="Voltar" class="material-icons">
+                arrow_back
+            </i>
+        </button>
+    </div>
+</mat-card>
+
+<form [formGroup]="form" novalidate style="margin: 20px;">
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+        <mat-form-field class="full-width"> 
+            <input matInput placeholder="Identificação" formControlName="identificacao">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Tipo do Solo</mat-label>
+            <mat-select formControlName="tipoSolo">
+
+                <mat-option *ngFor="let tipo of tiposSolo" [value]="tipo">
+                    {{ tipo }}
+                </mat-option>
+
+            </mat-select>
+
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Propriedade</mat-label>
+            <mat-select formControlName="propriedade">
+
+                <mat-option *ngFor="let prop of propriedades" [value]="prop">
+                    {{ prop.nome }}
+                </mat-option>
+
+            </mat-select>
+
+        </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+        <button mat-raised-button class="button" (click)="openDialog()">
+            <i class="material-icons">
+                gps_fixed
+            </i>
+            Marcar Área
+        </button>
+
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Área" formControlName="area" [disabled]="disabled"> 
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Unidade de Medida</mat-label>
+            <mat-select formControlName="unidadeDeMedida" [disabled]="disabled">
+
+                <mat-option *ngFor="let med of unidades" [value]="med">
+                    {{ med.abreviacao }}
+                </mat-option>
+
+            </mat-select>
+
+        </mat-form-field>
+    </div>
+
+    <div fxLayoutAlign="center" style="margin-top: 20px;">
+        <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="atualizar()"
+            style="margin-right: 25px;">Salvar</button>
+
+        <button mat-raised-button color="warn" routerLink="/talhao/">Cancelar</button>
+    </div>
+</form>

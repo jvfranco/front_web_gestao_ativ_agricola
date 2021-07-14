@@ -66,6 +66,17 @@ export class MapaTalhaoComponent implements OnInit {
     }),
   });
 
+  styleTal = new Style({
+    stroke: new Stroke({
+      color: 'yellow',
+      lineDash: [4],
+      width: 3,
+    }),
+    fill: new Fill({
+      color: 'rgba(0, 0, 255, 0.2)',
+    }),
+  });
+
   rasterLayer: TileLayer = new Tile({
     source: new TileJSON({
       url: env.urlApiImgSatelite + env.keyApiSat,
@@ -81,6 +92,20 @@ export class MapaTalhaoComponent implements OnInit {
           features: new GeoJSON().readFeatures(this.data.propriedade.coordenadas)
         }),
         style: this.style
+      });
+    }
+    return new VectorLayer({
+      source: this.source
+    })
+  }
+
+  geraVectorLayerTalhao(): VectorLayer {
+    if (this.data.coordenadas) {
+      return new VectorLayer({
+        source: new VectorSource({
+          features: new GeoJSON().readFeatures(this.data.coordenadas)
+        }),
+        style: this.styleTal
       });
     }
     return new VectorLayer({
@@ -116,7 +141,7 @@ export class MapaTalhaoComponent implements OnInit {
   geraMapa() {
     this.map = new Map({
       target: 'ol-map',
-      layers: [this.rasterLayer, this.geraVectorLayer(), this.vectorLayerDraw],
+      layers: [this.rasterLayer, this.geraVectorLayer(), this.geraVectorLayerTalhao(), this.vectorLayerDraw],
       view: this.view
     });
     this.addInteraction();
