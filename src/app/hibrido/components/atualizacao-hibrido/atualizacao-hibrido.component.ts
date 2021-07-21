@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cultura } from 'src/app/cultura';
 import { Marca, MarcaService } from 'src/app/marca';
+import { UnidadeDeMedida, UnidadeDeMedidaService } from 'src/app/unidade-de-medida';
 import { Hibrido } from '../../models';
 import { HibridoService } from '../../services';
 
@@ -17,6 +18,7 @@ export class AtualizacaoHibridoComponent implements OnInit {
   hibridoID: any;
   culturas?: Cultura[];
   marcas?: Marca[];
+  unidades?: UnidadeDeMedida[];
 
   constructor(
     private route: ActivatedRoute,
@@ -24,7 +26,8 @@ export class AtualizacaoHibridoComponent implements OnInit {
     private snackbar: MatSnackBar,
     private router: Router,
     private service: HibridoService,
-    private marcaService: MarcaService
+    private marcaService: MarcaService,
+    private unidadeService: UnidadeDeMedidaService
   ) { }
 
   ngOnInit(): void {
@@ -32,6 +35,7 @@ export class AtualizacaoHibridoComponent implements OnInit {
     this.retornarTodasMarcas();
     this.hibridoID = this.route.snapshot.paramMap.get('hibridoID');
     this.retornarDetalhado(this.hibridoID);
+    this.retornarTodasUnidades();
   }
 
   form = this.fb.group({
@@ -39,7 +43,8 @@ export class AtualizacaoHibridoComponent implements OnInit {
     idCultura: ['', Validators.required],
     ciclo: ['', Validators.required],
     observacoes: [''],
-    idMarca: ['', Validators.required]
+    idMarca: ['', Validators.required],
+    idUnidadeDeMedida: ['', Validators.required]
   })
 
   retornarDetalhado(id: string) {
@@ -52,6 +57,7 @@ export class AtualizacaoHibridoComponent implements OnInit {
         this.form.get('ciclo')?.setValue(data.ciclo);
         this.form.get('observacoes')?.setValue(data.observacoes);
         this.form.get('idMarca')?.setValue(data.marca.id);
+        this.form.get('idUnidadeDeMedida')?.setValue(data.unidadeDeMedida.id);
       },
       err => {
         console.log(JSON.stringify(err));
@@ -105,6 +111,19 @@ export class AtualizacaoHibridoComponent implements OnInit {
       err => {
         console.log(JSON.stringify(err));
         this.snackbar.open('Ocorreram erros na busca das Marcas.', 'Erro', {duration: 5000});
+      }
+    )
+  }
+
+  retornarTodasUnidades() {
+    this.unidadeService.retornarTodasUnidadesSemPaginacao().subscribe(
+      data => {
+        console.log(data);
+        this.unidades = data;
+      },
+      err => {
+        console.log(JSON.stringify(err));
+        this.snackbar.open('Ocorreram erros na busca das Unidades de Medida.', 'Erro', {duration: 5000});
       }
     )
   }

@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Cultura, CulturaService } from 'src/app/cultura';
 import { Marca, MarcaService } from 'src/app/marca';
+import { UnidadeDeMedida, UnidadeDeMedidaService } from 'src/app/unidade-de-medida';
 import { CulturaDTO, Hibrido } from '../../models';
 import { HibridoService } from '../../services';
 
@@ -17,18 +18,21 @@ export class CadastroHibridoComponent implements OnInit {
 
   culturas?: CulturaDTO[];
   marcas?: Marca[];
+  unidades?: UnidadeDeMedida[];
 
   constructor(
     private fb: FormBuilder,
     private snackbar: MatSnackBar,
     private router: Router,
     private service: HibridoService,
-    private marcaService: MarcaService
+    private marcaService: MarcaService,
+    private unidadeService: UnidadeDeMedidaService
   ) { }
 
   ngOnInit(): void {
     this.retornarTodasCultura();
     this.retornarTodasMarcas();
+    this.retornarTodasUnidades();
   }
 
   retornarTodasCultura() {
@@ -57,6 +61,19 @@ export class CadastroHibridoComponent implements OnInit {
     )
   }
 
+  retornarTodasUnidades() {
+    this.unidadeService.retornarTodasUnidadesSemPaginacao().subscribe(
+      data => {
+        console.log(data);
+        this.unidades = data;
+      },
+      err => {
+        console.log(JSON.stringify(err));
+        this.snackbar.open('Ocorreram erros na busca das Unidades de Medida.', 'Erro', {duration: 5000});
+      }
+    )
+  }
+
 
   form = this.fb.group({
     identificacao: ['', Validators.required],
@@ -64,6 +81,7 @@ export class CadastroHibridoComponent implements OnInit {
     ciclo: ['', Validators.required],
     observacoes: [''],
     idMarca: ['', Validators.required],
+    idUnidadeDeMedida: ['', Validators.required]
   })
 
   salvar() {
