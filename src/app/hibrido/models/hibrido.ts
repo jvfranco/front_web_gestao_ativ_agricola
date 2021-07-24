@@ -7,6 +7,7 @@ export class Hibrido {
         public cicloEmDias: string,
         public observacoes: string,
         public idMarca: string,
+        public quantidade: number,
         public idUnidadeDeMedida: string
     ) {}
 }

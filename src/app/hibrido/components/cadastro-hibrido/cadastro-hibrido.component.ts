@@ -81,6 +81,7 @@ export class CadastroHibridoComponent implements OnInit {
     ciclo: ['', Validators.required],
     observacoes: [''],
     idMarca: ['', Validators.required],
+    quantidade: [0, Validators.required],
     idUnidadeDeMedida: ['', Validators.required]
   })
 

@@ -44,6 +44,7 @@ export class AtualizacaoHibridoComponent implements OnInit {
     ciclo: ['', Validators.required],
     observacoes: [''],
     idMarca: ['', Validators.required],
+    quantidade: [0, Validators.required],
     idUnidadeDeMedida: ['', Validators.required]
   })
 
@@ -57,6 +58,7 @@ export class AtualizacaoHibridoComponent implements OnInit {
         this.form.get('ciclo')?.setValue(data.ciclo);
         this.form.get('observacoes')?.setValue(data.observacoes);
         this.form.get('idMarca')?.setValue(data.marca.id);
+        this.form.get('quantidade')?.setValue(data.quantidade);
         this.form.get('idUnidadeDeMedida')?.setValue(data.unidadeDeMedida.id);
       },
       err => {

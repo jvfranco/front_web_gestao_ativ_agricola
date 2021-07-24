@@ -6,6 +6,7 @@
     <p><b>Ciclo:</b> {{ data.ciclo }}</p>
     <p><b>Marca:</b> {{ data.marca.nome }}</p>
     <p><b>Observações:</b> {{ data.observacoes }}</p>
+    <p><b>Quantidade:</b> {{ data.quantidade }}  {{ data.unidadeDeMedida.abreviacao }}</p>    
 </div>
 <div mat-dialog-actions>
     <button mat-mini-fab color="primary" (click)="onNoClick()" cdkFocusInitial>Ok</button>
