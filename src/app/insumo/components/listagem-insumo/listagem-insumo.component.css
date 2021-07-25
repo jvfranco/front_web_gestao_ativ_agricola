@@ -15,3 +15,10 @@ table {
   margin-left: 10%;
   margin-right: 10%;
 }
+
+.button-down {
+  display: flex; 
+  align-items: flex-end; 
+  justify-content: flex-end; 
+  width: 100%; 
+}

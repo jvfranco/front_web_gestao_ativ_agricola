@@ -17,6 +17,7 @@ import { MaquinaModule, MaquinaRoutingModule } from './maquina';
 import { PropriedadeModule, PropriedadeRoutingModule } from './propriedade';
 import { PessoaModule, PessoaRoutingModule } from './pessoa';
 import { TalhaoModule, TalhaoRoutingModule } from './talhao';
+import { HomeModule, HomeRoutingModule } from './home';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,8 @@ import { TalhaoModule, TalhaoRoutingModule } from './talhao';
     PessoaRoutingModule,
     TalhaoModule,
     TalhaoRoutingModule,
+    HomeModule,
+    HomeRoutingModule,
     
     AppRoutingModule
   ],

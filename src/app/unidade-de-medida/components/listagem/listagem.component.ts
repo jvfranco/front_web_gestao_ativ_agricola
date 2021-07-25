@@ -1,10 +1,12 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+
+import * as XLSX from 'xlsx';
 
 import { Paginacao } from '../../../core';
 import { UnidadeDeMedida } from '../../models';
@@ -17,6 +19,8 @@ import { DetalheUnidMedComponent } from '../dialog';
   styleUrls: ['./listagem.component.css']
 })
 export class ListagemComponent implements OnInit {
+
+  @ViewChild('TABLE') table!: ElementRef;
 
   paginacao: Paginacao = {};
   totalElements: any;
@@ -102,5 +106,14 @@ export class ListagemComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+
+  exportAsExcel() {
+    const ws: XLSX.WorkSheet=XLSX.utils.table_to_sheet(this.table.nativeElement);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, 'unidade-de-medida.xlsx');
   }
 }

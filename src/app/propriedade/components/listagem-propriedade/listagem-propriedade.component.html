@@ -17,7 +17,7 @@
     <input matInput (keyup)="applyFilter($event)" #input>
 </mat-form-field>
 
-<div class="mat-elevation-z8">
+<div class="mat-elevation-z8" style="border-radius: 10px;" #TABLE>
     <table mat-table [dataSource]="dataSource" matSort (matSortChange)="ordenar($event)">
 
         <ng-container matColumnDef="nome">
@@ -38,13 +38,17 @@
         <ng-container matColumnDef="acoes" style="width: 15%;">
             <th mat-header-cell *matHeaderCellDef> Ações </th>
             <td mat-cell *matCellDef="let element">
-                <i matTooltip="Informações do Item" class="material-icons" style="color: seagreen; margin-right: 10px; cursor: pointer;" (click)="openDialog(element)">
+                <i matTooltip="Informações do Item" class="material-icons"
+                    style="color: seagreen; margin-right: 10px; cursor: pointer;" (click)="openDialog(element)">
                     info
                 </i>
-                <i matTooltip="Editar Item" class="material-icons" style="color: darkslateblue; margin-right: 10px; cursor: pointer;" routerLink="/propriedade/atualizacao/{{element.id}}">
+                <i matTooltip="Editar Item" class="material-icons"
+                    style="color: darkslateblue; margin-right: 10px; cursor: pointer;"
+                    routerLink="/propriedade/atualizacao/{{element.id}}">
                     edit
                 </i>
-                <i matTooltip="Excluir Item" class="material-icons" style="color: firebrick; cursor: pointer;" (click)="excluir(element.id)">
+                <i matTooltip="Excluir Item" class="material-icons" style="color: firebrick; cursor: pointer;"
+                    (click)="excluir(element.id)">
                     delete
                 </i>
             </td>
@@ -57,9 +61,12 @@
             <td class="mat-cell" colspan="4">Não há dados para serem exibidos!</td>
         </tr>
     </table>
-    <mat-paginator 
-            [length]="paginacao.totalElements"
-            [pageSize]="paginacao.size"
-            (page)="paginar($event)"></mat-paginator>
-</div>
+    <mat-paginator [length]="paginacao.totalElements" [pageSize]="paginacao.size" (page)="paginar($event)">
+    </mat-paginator>
 
+    <div class="button-down">
+        <button mat-raised-button matTooltip="Exportar para Excel" color="primary" (click)="exportAsExcel()">
+            <mat-icon aria-hidden="false" style="color: white;">file_download</mat-icon>
+        </button>
+    </div>
+</div>

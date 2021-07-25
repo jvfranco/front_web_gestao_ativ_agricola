@@ -114,7 +114,7 @@ export class MapaPropriedadeComponent implements OnInit {
       view: this.view
     });
     this.addInteraction();
-  }
+  } 
 
   addInteraction() {
     this.draw = new Draw({

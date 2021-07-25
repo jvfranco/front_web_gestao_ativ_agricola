@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -8,6 +8,7 @@ import { Paginacao } from 'src/app/core';
 import { Cultura } from '../../models';
 import { CulturaService } from '../../services';
 import { DetalheCulturaComponent } from '../dialog';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-listagem-cultura',
@@ -15,6 +16,8 @@ import { DetalheCulturaComponent } from '../dialog';
   styleUrls: ['./listagem-cultura.component.css']
 })
 export class ListagemCulturaComponent implements OnInit {
+
+  @ViewChild('TABLE') table!: ElementRef;
 
   paginacao: Paginacao = {};
   totalElements: any;
@@ -100,6 +103,15 @@ export class ListagemCulturaComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+
+  exportAsExcel() {
+    const ws: XLSX.WorkSheet=XLSX.utils.table_to_sheet(this.table.nativeElement);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, 'cultura.xlsx');
   }
 
 }

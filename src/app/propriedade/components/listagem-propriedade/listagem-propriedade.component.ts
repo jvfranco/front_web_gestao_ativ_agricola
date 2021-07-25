@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -8,6 +8,7 @@ import { Paginacao } from 'src/app/core';
 import { Propriedade } from '../../models';
 import { PropriedadeService } from '../../services';
 import { DetalhePropriedadeComponent } from '../dialog';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-listagem-propriedade',
@@ -15,6 +16,8 @@ import { DetalhePropriedadeComponent } from '../dialog';
   styleUrls: ['./listagem-propriedade.component.css']
 })
 export class ListagemPropriedadeComponent implements OnInit {
+
+  @ViewChild('TABLE') table!: ElementRef;
 
   paginacao: Paginacao = {};
   totalElements: any;
@@ -102,5 +105,13 @@ export class ListagemPropriedadeComponent implements OnInit {
     });
   }
 
+  exportAsExcel() {
+    const ws: XLSX.WorkSheet=XLSX.utils.table_to_sheet(this.table.nativeElement);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, 'propriedade.xlsx');
+  }
 
 }
