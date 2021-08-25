@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
@@ -14,18 +11,21 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCardModule } from '@angular/material/card';
-import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { LayoutModule } from '../layout';
-
-import { HomeComponent, HomeOcorrenciaComponent } from './components';
-import { HomeService } from './services';
+import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { HttpClientModule } from '@angular/common/http';
+import { AtividadeService } from './services';
+import { AtividadeComponent } from './components';
+import { ListagemAtividadeComponent } from './components/listagem-atividade/listagem-atividade.component';
 
 @NgModule({
   declarations: [
-    HomeComponent,
-    HomeOcorrenciaComponent
+    AtividadeComponent,
+    ListagemAtividadeComponent
   ],
   imports: [
     CommonModule,
@@ -43,13 +43,15 @@ import { HomeService } from './services';
     MatPaginatorModule,
     MatCardModule,
     MatSortModule,
-    MatSelectModule,
     MatDialogModule,
 
     HttpClientModule
   ],
+  exports: [
+    AtividadeComponent
+  ],
   providers: [
-    HomeService
+    AtividadeService
   ]
 })
-export class HomeModule { }
+export class AtividadeModule { }

@@ -11,7 +11,7 @@ export class Ocorrencia {
         public safra: Safra,
         public propriedade: Propriedade,
         public talhao: Talhao,
-        public coordenadas: Coordenadas,
+        public coordenadas: string,
         public dataOcorrencia: Date
     ) {}
 }

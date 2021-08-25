@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../auth/auth.guard';
 import { 
     AtualizacaoHibridoComponent, 
     CadastroHibridoComponent, 
@@ -24,7 +25,8 @@ export const HibridoRoutes: Routes = [
                 path: 'atualizacao/:hibridoID',
                 component: AtualizacaoHibridoComponent
             }
-        ]
+        ],
+        canActivate: [AuthGuard]
     }
 ];
 

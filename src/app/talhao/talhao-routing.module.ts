@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../auth/auth.guard';
 
 import { 
     AtualizacaoTalhaoComponent,
@@ -25,7 +26,8 @@ export const TalhaoRoutes: Routes = [
                 path: 'atualizacao/:talhaoID',
                 component: AtualizacaoTalhaoComponent
             }
-        ]
+        ],
+        canActivate: [AuthGuard]
     }
 ];
 

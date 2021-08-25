@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../auth/auth.guard';
 import { 
     AtualizacaoMarcaComponent,
     CadastroMarcaComponent,
@@ -25,7 +26,8 @@ export const MarcaRoutes: Routes = [
                 path: 'atualizacao/:marcaID',
                 component: AtualizacaoMarcaComponent
             }
-        ]
+        ],
+        canActivate: [AuthGuard]
     }
 ];
 

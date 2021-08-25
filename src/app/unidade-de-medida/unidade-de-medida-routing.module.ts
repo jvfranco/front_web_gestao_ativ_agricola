@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../auth/auth.guard';
 
 import {
     UnidadeDeMedidaComponent,
@@ -26,7 +27,8 @@ export const UnidadeDeMedidaRoutes: Routes = [
                 path: 'atualizacao/:unidMedidaID',
                 component: AtualizacaoComponent
             }
-        ]
+        ],
+        canActivate: [AuthGuard]
     }
 ];
 

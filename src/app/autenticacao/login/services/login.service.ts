@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
-
 import { environment as env } from '../../../../environments/environment';
 
 import { Login } from '../';
@@ -12,9 +10,23 @@ export class LoginService {
 
   private readonly PATH: string = 'auth';
 
-  constructor(private http: HttpClient) { }
+  private storage: Storage;
 
-  logar(login: Login): Observable<any> {
-    return this.http.post(env.baseUrl + this.PATH, login);
-  }
+  constructor(
+    private http: HttpClient
+  ) { 
+    this.storage = window.localStorage;
+   }
+
+   logar(login: Login) {
+     return this.http.post<any>(env.baseUrl + this.PATH, login);
+   }
+
+   loggedIn() {
+     return !!localStorage.getItem('token');
+   }
+
+   getToken() {
+     return localStorage.getItem('token');
+   }
 }

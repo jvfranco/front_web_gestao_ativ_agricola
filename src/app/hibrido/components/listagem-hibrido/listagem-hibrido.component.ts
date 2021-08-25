@@ -23,7 +23,7 @@ export class ListagemHibridoComponent implements OnInit {
   totalElements: any;
   dataSource !: MatTableDataSource<Hibrido>;
 
-  displayedColumns: string[] = ['identificacao', 'cultura', 'ciclo', 'marca', 'acoes'];
+  displayedColumns: string[] = ['identificacao', 'cultura', 'ciclo', 'qtde', 'marca', 'acoes'];
 
   constructor(
     private snackbar: MatSnackBar,

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../auth/auth.guard';
 import { 
     AtualizacaoInsumoComponent, 
     CadastroInsumoComponent, 
@@ -25,7 +26,8 @@ export const InsumoRoutes: Routes = [
                 path: 'atualizacao/:insumoID',
                 component: AtualizacaoInsumoComponent
             }
-        ]
+        ],
+        canActivate: [AuthGuard]
     }
 ];
 

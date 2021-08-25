@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../auth/auth.guard';
 import { 
     AtualizacaoMaquinaComponent,
     CadastroMaquinaComponent,
@@ -25,7 +26,8 @@ export const MaquinaRoutes: Routes = [
                 path: 'atualizacao/:maquinaID',
                 component: AtualizacaoMaquinaComponent
             }
-        ]
+        ],
+        canActivate: [AuthGuard]
     }
 ];
 

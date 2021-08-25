@@ -18,12 +18,13 @@ import * as XLSX from 'xlsx';
 export class ListagemInsumoComponent implements OnInit {
   
   @ViewChild('TABLE') table!: ElementRef;
-
+  
   paginacao: Paginacao = {};
   totalElements: any;
   dataSource !: MatTableDataSource<Insumo>;
 
-  displayedColumns: string[] = ['identificacao', 'ingredientesAtivos', 'formulacao', 'modoDeAcao', 'quantidade', 'unidadeDeMedida', 'marca', 'acoes'];
+  displayedColumns: string[] = ['identificacao', 'ingredientesAtivos', 'formulacao', 
+          'modoDeAcao', 'quantidade', 'unidadeDeMedida', 'marca', 'acoes'];
 
   constructor(
     private snackbar: MatSnackBar,
@@ -52,12 +53,9 @@ export class ListagemInsumoComponent implements OnInit {
     this.service.retornarTodasInsumos(this.paginacao).subscribe(
       data => {
         this.paginacao.totalElements = data.totalElements;
-        console.log(data);
-        console.log(JSON.stringify(this.paginacao));
         this.dataSource = new MatTableDataSource(data.content);
       },
       err => {
-        console.log(JSON.stringify(err));
         this.snackbar.open('Ocorreram erros na busca dos Insumos.', 'Erro', {duration: 5000});
       }
     )
@@ -78,18 +76,13 @@ export class ListagemInsumoComponent implements OnInit {
   }
 
   excluir(id: string) {
-    let msg: string;
     this.service.excluirInsumo(id).subscribe(
       data => {
-        console.log('Exclusão' + data);
         this.retornarTodos();
-        msg = 'Insumo excluído com sucesso.';
-        this.snackbar.open(msg, 'Sucesso', {duration: 5000});
+        this.snackbar.open('Insumo excluído com sucesso.', 'Sucesso', {duration: 5000});
       },
       err => {
-        console.log(JSON.stringify(err));
-        msg = 'Erro na exclusão do Insumo.';
-        this.snackbar.open(msg, 'Erro', {duration: 5000});
+        this.snackbar.open('Erro na exclusão do Insumo.', 'Erro', {duration: 5000});
       }
     )
   };

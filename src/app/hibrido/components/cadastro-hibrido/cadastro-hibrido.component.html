@@ -12,79 +12,81 @@
     </div>
 </mat-card>
 
-<form [formGroup]="form" fxLayoutAlign="center" novalidate style="margin: 20px;">
-    <mat-list>
-        <mat-list-item>
-            <mat-form-field>
-                <mat-label>Cultura</mat-label>
-                <mat-select formControlName="idCultura">
+<form [formGroup]="form" novalidate style="margin: 20px;">
 
-                    <mat-option *ngFor="let cult of culturas" [value]="cult.id">
-                        {{ cult.nome }}
-                    </mat-option>
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+        <mat-form-field class="full-width">
+            <mat-label>Cultura</mat-label>
+            <mat-select formControlName="idCultura">
 
-                </mat-select>
+                <mat-option *ngFor="let cult of culturas" [value]="cult.id">
+                    {{ cult.nome }}
+                </mat-option>
 
-            </mat-form-field>
-        </mat-list-item>
+            </mat-select>
 
-        <mat-list-item>
-            <mat-form-field>
-                <input matInput placeholder="Identificação" formControlName="identificacao">
-            </mat-form-field>
-        </mat-list-item>
+        </mat-form-field>
 
-        <mat-list-item>
-            <mat-form-field>
-                <input matInput placeholder="Ciclo" formControlName="ciclo">
-            </mat-form-field>
-        </mat-list-item>
 
-        <mat-list-item>
-            <mat-form-field>
-                <mat-label>Marca</mat-label>
-                <mat-select formControlName="idMarca">
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Identificação" formControlName="identificacao">
+        </mat-form-field>
+    </div>
 
-                    <mat-option *ngFor="let marca of marcas" [value]="marca.id">
-                        {{ marca.nome }}
-                    </mat-option>
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Ciclo" formControlName="ciclo">
+        </mat-form-field>
 
-                </mat-select>
 
-            </mat-form-field>
-        </mat-list-item>
 
-        <mat-list-item>
-            <mat-form-field>
-                <input type="number" matInput placeholder="Quantidade" formControlName="quantidade">
-            </mat-form-field>
-        </mat-list-item>
+        <mat-form-field class="full-width">
+            <mat-label>Marca</mat-label>
+            <mat-select formControlName="idMarca">
 
-        <mat-list-item>
-            <mat-form-field>
-                <mat-label>Unidade de Medida</mat-label>
-                <mat-select formControlName="idUnidadeDeMedida">
+                <mat-option *ngFor="let marca of marcas" [value]="marca.id">
+                    {{ marca.nome }}
+                </mat-option>
 
-                    <mat-option *ngFor="let unid of unidades" [value]="unid.id">
-                        {{ unid.abreviacao }}
-                    </mat-option>
+            </mat-select>
 
-                </mat-select>
+        </mat-form-field>
 
-            </mat-form-field>
-        </mat-list-item>
+    </div>
 
-        <mat-list-item>
-            <mat-form-field style="width: 500px; margin-top: 20px;">
-                <textarea matInput placeholder="Observações" formControlName="observacoes"></textarea>
-            </mat-form-field>
-        </mat-list-item>
 
-        <mat-list-item fxLayoutAlign="center" style="margin-top: 20px;">
-            <button mat-raised-button color="primary" [disabled]="form.invalid"
-                (click)="salvar()" style="margin-right: 25px;">Salvar</button>
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+        <mat-form-field class="full-width">
+            <input type="number" matInput placeholder="Quantidade" formControlName="quantidade">
+        </mat-form-field>
 
-            <button mat-raised-button color="warn" (click)="resetarForm()">Cancelar</button>
-        </mat-list-item>
-    </mat-list>
+
+
+        <mat-form-field class="full-width">
+            <mat-label>Unidade de Medida</mat-label>
+            <mat-select formControlName="idUnidadeDeMedida">
+
+                <mat-option *ngFor="let unid of unidades" [value]="unid.id">
+                    {{ unid.abreviacao }}
+                </mat-option>
+
+            </mat-select>
+
+        </mat-form-field>
+
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+        <mat-form-field class="full-width">
+            <textarea matInput placeholder="Observações" formControlName="observacoes"></textarea>
+        </mat-form-field>
+    
+    </div>
+
+    <div fxLayoutAlign="center" style="margin-top: 20px;">
+        <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="salvar()"
+            style="margin-right: 25px;">Salvar</button>
+
+        <button mat-raised-button color="warn" (click)="resetarForm()">Cancelar</button>
+    </div>
 </form>

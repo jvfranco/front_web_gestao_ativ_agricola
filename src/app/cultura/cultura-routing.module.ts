@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../auth/auth.guard';
 
 import {
     CulturaComponent,
@@ -25,7 +26,8 @@ export const CulturaRoutes: Routes = [
                 path: 'atualizacao/:culturaID',
                 component: AtualizacaoCulturaComponent
             }
-        ]
+        ],
+        canActivate: [AuthGuard]
     }
 ];
 

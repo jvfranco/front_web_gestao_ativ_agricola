@@ -1,30 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-
-import { environment as env } from '../../../../environments/environment';
-
-import Map from 'ol/Map';
-import View from 'ol/View';
-import * as olProj from 'ol/proj';
-import Tile from 'ol/layer/Tile';
-import TileJSON from 'ol/source/TileJSON';
-import { Vector as VectorSource } from 'ol/source';
-import { Draw } from 'ol/interaction';
-import GeometryType from 'ol/geom/GeometryType';
-import { Tile as TileLayer, Vector as VectorLayer } from 'ol/layer';
-import { getArea } from 'ol/sphere';
-import Polygon from 'ol/geom/Polygon';
-import Point from 'ol/geom/Point';
-import GeoJSON from 'ol/format/GeoJSON';
-import Style from 'ol/style/Style';
-import Stroke from 'ol/style/Stroke';
-import Fill from 'ol/style/Fill';
-import { fromLonLat } from 'ol/proj';
-
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 import { HomeService } from '../../services';
 import { Ocorrencia } from '../../models';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Feature } from 'ol';
+import { Paginacao } from 'src/app/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { PageEvent } from '@angular/material/paginator';
+import { Sort } from '@angular/material/sort';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-home-ocorrencia',
@@ -33,79 +16,70 @@ import { Feature } from 'ol';
 })
 export class HomeOcorrenciaComponent implements OnInit {
 
-  map!: Map;
-  source = new VectorSource();
-  draw!: Draw;
-  satLayer!: TileLayer;
-  ocorrencias!: Ocorrencia[];
-  features: Feature[] = [];
+  @ViewChild('TABLE') table!: ElementRef;
+
+  paginacao: Paginacao = {};
+  totalElements: any;
+  dataSource !: MatTableDataSource<Ocorrencia>;
+
+  displayedColumns: string[] = ['titulo', 'descricao', 'dataOcorrencia', 'propriedade', 'talhao', 'posicao'];
 
   constructor(
-    private service: HomeService,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    public service: HomeService
   ) { }
 
   ngOnInit(): void {
-    this.retornarOcorrenciasSemPaginacaoo();
-    this.geraMapa();
+    this.paginacao.page = 0;
+    this.paginacao.size = 10;
+    this.paginacao.sort = 'id';
+    this.paginacao.direction = 'ASC';
+    this.retornarTodos();
   }
 
-  geraMapa() {
-    this.map = new Map({
-      target: 'ol-map',
-      layers: [this.rasterLayer, this.geraVectorLayer()],
-      view: this.view
-    });
-    this.addInteraction();
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
-  addInteraction() {
-    this.draw = new Draw({
-      source: this.source,
-      type: GeometryType.POLYGON
-    });
-    this.map.addInteraction(this.draw);
-  }
-
-  rasterLayer: TileLayer = new Tile({
-    source: new TileJSON({
-      url: env.urlApiImgSatelite + env.keyApiSat,
-      tileSize: 256,
-      crossOrigin: 'anonymous'
-    })
-  });
-
-  view: View = new View({
-    center: olProj.fromLonLat([-50.4227242924097, -22.66134868581503]),
-    zoom: 15,
-    projection: 'EPSG:3857'
-  });
-
-  geraVectorLayer(): VectorLayer {
-    return new VectorLayer({
-      source: new VectorSource({
-        features: this.features
-      })
-    });
-  };
-
-  async retornarOcorrenciasSemPaginacaoo() {
-    await this.service.retornarOcorrenciasSemPaginacaoo().subscribe(
+  retornarTodos() {
+    this.service.retornarTodasOcorrencias(this.paginacao).subscribe(
       data => {
-        this.ocorrencias = data;
-        for (let i = 0; i < this.ocorrencias.length; i++) {
-          this.features.push(
-            new Feature({
-              geometry: new Point(fromLonLat([ this.ocorrencias[i].coordenadas.longitude, this.ocorrencias[i].coordenadas.latitude ]))
-            })
-          );
-        }
-        console.log(JSON.stringify(this.features));
+        this.paginacao.totalElements = data.totalElements;
+        console.log(JSON.stringify(data));
+        this.dataSource = new MatTableDataSource(data.content);
       },
       err => {
         this.snackbar.open('Ocorreram erros na busca das Ocorrências.', 'Erro', {duration: 5000});
       }
     )
-  };
+  }
+
+  paginar(pageEvent: PageEvent) {
+    this.paginacao.page = pageEvent.pageIndex;
+    this.retornarTodos();
+  }
+
+  ordenar(sort: Sort) {
+    if (sort.direction != '') {
+      this.paginacao.sort = sort.active;
+      this.paginacao.direction = sort.direction.toUpperCase();
+    }
+
+    this.retornarTodos();
+  }
+
+  exportAsExcel() {
+    const ws: XLSX.WorkSheet=XLSX.utils.table_to_sheet(this.table.nativeElement);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, 'ocorrencias.xlsx');
+  } 
 
 }
